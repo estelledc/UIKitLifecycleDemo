@@ -1,0 +1,23 @@
+UIKitLifecycleDemo.xcodeproj/project.pbxproj
+  s_9340ed41c548fc::t_b1517e453abf28 14,39,80,209
+UIKitLifecycleDemo/DemoLogStore.swift
+  s_9340ed41c548fc::t_902c483131d884 1-222
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "e8cf89c1e400bcec9b1018c47bac638ee368a968",
+  "prompts": {},
+  "sessions": {
+    "s_9340ed41c548fc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9788d74c-dc80-4c60-8ed9-f8f7c8e0039a",
+        "model": "unknown"
+      },
+      "human_author": "estelledc <150260202+estelledc@users.noreply.github.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
