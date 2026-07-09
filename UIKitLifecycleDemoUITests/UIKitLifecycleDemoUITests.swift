@@ -33,6 +33,11 @@ final class UIKitLifecycleDemoUITests: XCTestCase {
         XCTAssertTrue(app.tables["demoLogPanel"].waitForExistence(timeout: 5), "The in-app log panel should open.")
         XCTAssertTrue(app.buttons["logFilterButton"].waitForExistence(timeout: 5), "The log filter should be visible.")
         XCTAssertTrue(app.switches["onlyKeyEventsSwitch"].waitForExistence(timeout: 5), "The key events switch should be visible.")
+        XCTAssertTrue(app.buttons["Pause Scroll"].waitForExistence(timeout: 5), "The pause scroll button should start with the active auto-scroll title.")
+        app.buttons["pauseLogsButton"].tap()
+        XCTAssertTrue(app.buttons["Resume Scroll"].waitForExistence(timeout: 5), "The pause scroll button should show the resume title after pausing.")
+        app.buttons["pauseLogsButton"].tap()
+        XCTAssertTrue(app.buttons["Pause Scroll"].waitForExistence(timeout: 5), "The pause scroll button should restore the pause title after resuming.")
         app.buttons["closeLogsButton"].tap()
 
         openLearnMenuItem("Guide", in: app)

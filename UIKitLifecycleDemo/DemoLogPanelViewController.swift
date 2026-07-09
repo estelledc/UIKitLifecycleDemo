@@ -19,6 +19,7 @@ final class DemoLogPanelViewController: UITableViewController {
     private let onlyKeyEventsSwitch = UISwitch()
     private let headerStack = UIStackView()
     private let searchController = UISearchController(searchResultsController: nil)
+    private var pauseScrollButton: UIBarButtonItem?
     private let timestampFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss.SSS"
@@ -75,6 +76,7 @@ final class DemoLogPanelViewController: UITableViewController {
             self?.toggleAutoScroll(action)
         })
         pauseButton.accessibilityIdentifier = "pauseLogsButton"
+        pauseScrollButton = pauseButton
 
         navigationItem.rightBarButtonItems = [copyButton, clearButton, pauseButton]
     }
@@ -163,7 +165,7 @@ final class DemoLogPanelViewController: UITableViewController {
 
     private func toggleAutoScroll(_ action: UIAction) {
         isAutoScrollPaused.toggle()
-        action.title = isAutoScrollPaused ? "Resume Scroll" : "Pause Scroll"
+        pauseScrollButton?.title = isAutoScrollPaused ? "Resume Scroll" : "Pause Scroll"
         if !isAutoScrollPaused {
             scrollToBottom()
         }
