@@ -2,6 +2,8 @@ import UIKit
 
 final class ReminderDetailViewController: UIViewController {
     private let reminderTitle: String
+    private let presentationMode: DetailPresentationMode
+    private let saveActionMode: SaveActionMode
     private let onSave: (String) -> Void
 
     private let textField: UITextField = {
@@ -11,13 +13,21 @@ final class ReminderDetailViewController: UIViewController {
         textField.returnKeyType = .done
         textField.placeholder = "Reminder title"
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.accessibilityIdentifier = "titleTextField"
         return textField
     }()
 
-    init(reminderTitle: String, onSave: @escaping (String) -> Void) {
+    init(
+        reminderTitle: String,
+        presentationMode: DetailPresentationMode,
+        saveActionMode: SaveActionMode,
+        onSave: @escaping (String) -> Void
+    ) {
         self.reminderTitle = reminderTitle
+        self.presentationMode = presentationMode
+        self.saveActionMode = saveActionMode
         self.onSave = onSave
-        print("[ReminderDetailViewController] init(reminderTitle:onSave:) - reminderTitle: \(reminderTitle)")
+        DemoLog.print("ReminderDetailViewController", "init(reminderTitle:onSave:)", "reminderTitle: \(reminderTitle), presentationMode: \(presentationMode.rawValue), saveActionMode: \(saveActionMode.rawValue)")
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -27,12 +37,18 @@ final class ReminderDetailViewController: UIViewController {
     }
 
     deinit {
-        print("[ReminderDetailViewController] deinit - detail controller released")
+        DemoLog.print("ReminderDetailViewController", "deinit", "detail controller released")
+    }
+
+    override func loadView() {
+        DemoLog.print("ReminderDetailViewController", "loadView", "before super, isViewLoaded: \(isViewLoaded)")
+        super.loadView()
+        DemoLog.print("ReminderDetailViewController", "loadView", "after super, isViewLoaded: \(isViewLoaded), view type: \(type(of: view!))")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("[ReminderDetailViewController] viewDidLoad - initial text: \(reminderTitle)")
+        DemoLog.print("ReminderDetailViewController", "viewDidLoad", "isViewLoaded: \(isViewLoaded), view type: \(type(of: view!)), initial text: \(reminderTitle)")
 
         setupNavigation()
         setupTextField()
@@ -40,33 +56,74 @@ final class ReminderDetailViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("[ReminderDetailViewController] viewWillAppear - detail is about to appear")
+        DemoLog.print("ReminderDetailViewController", "viewWillAppear", "detail is about to appear, navigationController exists: \(navigationController != nil), presentingViewController exists: \(presentingViewController != nil)")
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("[ReminderDetailViewController] viewDidAppear - detail is visible")
+        DemoLog.print("ReminderDetailViewController", "viewDidAppear", "detail is visible, presentationStyle: \(presentationMode.rawValue)")
+        printNavigationStack(from: self, "after detail appears")
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("[ReminderDetailViewController] viewWillDisappear - detail is about to disappear")
+        DemoLog.print("ReminderDetailViewController", "viewWillDisappear", "detail is about to disappear")
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("[ReminderDetailViewController] viewDidDisappear - detail disappeared")
+        DemoLog.print("ReminderDetailViewController", "viewDidDisappear", "detail disappeared")
     }
 
-    // Save 按钮通过 target-action 让 UIKit 在点击时调用 saveReminder。
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        DemoLog.print("ReminderDetailViewController", "viewWillLayoutSubviews", "view.bounds: \(view.bounds), safeAreaInsets: \(view.safeAreaInsets)")
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        DemoLog.print("ReminderDetailViewController", "viewDidLayoutSubviews", "view.bounds: \(view.bounds), safeAreaInsets: \(view.safeAreaInsets), textField.frame: \(textField.frame)")
+    }
+
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        DemoLog.print("ReminderDetailViewController", "viewSafeAreaInsetsDidChange", "safeAreaInsets: \(view.safeAreaInsets)")
+    }
+
+    // Save 按钮通过 target-action 或 UIAction 让 UIKit 在点击时调用 saveReminder。
     private func setupNavigation() {
         title = "Edit Reminder"
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .save,
-            target: self,
-            action: #selector(saveReminder)
-        )
+
+        let saveButton: UIBarButtonItem
+        switch saveActionMode {
+        case .targetAction:
+            saveButton = UIBarButtonItem(
+                barButtonSystemItem: .save,
+                target: self,
+                action: #selector(saveReminder)
+            )
+            DemoLog.print("ReminderDetailViewController", "setupNavigation", "Save uses target-action and #selector(saveReminder)")
+        case .uiAction:
+            saveButton = UIBarButtonItem(
+                title: "Save",
+                primaryAction: UIAction { [weak self] _ in
+                    DemoLog.print("ReminderDetailViewController", "UIAction", "closure received button tap, about to call saveReminder")
+                    self?.saveReminder()
+                }
+            )
+            DemoLog.print("ReminderDetailViewController", "setupNavigation", "Save uses UIAction closure")
+        }
+
+        saveButton.accessibilityIdentifier = "saveButton"
+        navigationItem.rightBarButtonItem = saveButton
+
+        if presentationMode == .present {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(systemItem: .cancel, primaryAction: UIAction { [weak self] _ in
+                DemoLog.print("ReminderDetailViewController", "cancel", "dismiss presented navigation controller")
+                self?.dismiss(animated: true)
+            })
+        }
     }
 
     // 文本框显示列表页传进来的 title，方便修改后回传。
@@ -89,12 +146,19 @@ final class ReminderDetailViewController: UIViewController {
         let editedTitle = rawText.trimmingCharacters(in: .whitespacesAndNewlines)
         let titleToSave = editedTitle.isEmpty ? reminderTitle : editedTitle
 
-        print("[ReminderDetailViewController] saveReminder - rawText: \(rawText), titleToSave: \(titleToSave)")
-        print("[ReminderDetailViewController] saveReminder - about to call onSave")
+        DemoLog.print("ReminderDetailViewController", "saveReminder", "rawText: \(rawText), titleToSave: \(titleToSave), presentationMode: \(presentationMode.rawValue)")
+        DemoLog.print("ReminderDetailViewController", "saveReminder", "about to call onSave")
         onSave(titleToSave)
 
-        print("[ReminderDetailViewController] saveReminder - about to popViewController")
-        navigationController?.popViewController(animated: true)
+        switch presentationMode {
+        case .show, .push:
+            DemoLog.print("ReminderDetailViewController", "saveReminder", "about to popViewController")
+            printNavigationStack(from: self, "before pop")
+            navigationController?.popViewController(animated: true)
+        case .present:
+            DemoLog.print("ReminderDetailViewController", "saveReminder", "about to dismiss presented navigation controller")
+            dismiss(animated: true)
+        }
     }
 }
 

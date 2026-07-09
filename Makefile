@@ -10,7 +10,7 @@ APP_PATH := $(DERIVED_DATA)/Build/Products/$(CONFIGURATION)-iphonesimulator/UIKi
 BUNDLE_ID := com.example.UIKitLifecycleDemo
 XCBEAUTIFY ?= xcbeautify
 
-.PHONY: build run open logs clean
+.PHONY: build test-ui run open logs clean
 
 build:
 	@mkdir -p "$(LOG_DIR)"
@@ -39,6 +39,28 @@ run: build
 	@xcrun simctl bootstatus booted -b
 	@xcrun simctl install booted "$(APP_PATH)"
 	@xcrun simctl launch booted "$(BUNDLE_ID)"
+
+test-ui:
+	@mkdir -p "$(LOG_DIR)"
+	@set -o pipefail; \
+	if command -v "$(XCBEAUTIFY)" >/dev/null 2>&1; then \
+		xcodebuild \
+			-project "$(PROJECT)" \
+			-scheme "$(SCHEME)" \
+			-configuration "$(CONFIGURATION)" \
+			-destination "$(DESTINATION)" \
+			-derivedDataPath "$(DERIVED_DATA)" \
+			test 2>&1 | tee "$(BUILD_LOG)" | "$(XCBEAUTIFY)"; \
+	else \
+		echo "xcbeautify not found; showing raw xcodebuild output."; \
+		xcodebuild \
+			-project "$(PROJECT)" \
+			-scheme "$(SCHEME)" \
+			-configuration "$(CONFIGURATION)" \
+			-destination "$(DESTINATION)" \
+			-derivedDataPath "$(DERIVED_DATA)" \
+			test 2>&1 | tee "$(BUILD_LOG)"; \
+	fi
 
 open:
 	@open "$(PROJECT)"

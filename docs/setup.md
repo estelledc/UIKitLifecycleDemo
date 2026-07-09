@@ -99,6 +99,7 @@ make build
 make run
 make open
 make logs
+make test-ui
 make clean
 ```
 
@@ -110,6 +111,7 @@ make clean
 | `make run` | 构建、安装并启动到 Simulator |
 | `make open` | 打开 Xcode 工程 |
 | `make logs` | 查看最近一次构建日志尾部 |
+| `make test-ui` | 启动 Simulator 并运行 UI Test |
 | `make clean` | 清理本项目 `.DerivedData` 和构建日志 |
 
 ## 常见问题

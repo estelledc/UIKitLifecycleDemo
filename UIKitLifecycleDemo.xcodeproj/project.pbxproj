@@ -11,7 +11,22 @@
 		A10000000000000000000002 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* SceneDelegate.swift */; };
 		A10000000000000000000003 /* ReminderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* ReminderListViewController.swift */; };
 		A10000000000000000000004 /* ReminderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* ReminderDetailViewController.swift */; };
+		A10000000000000000000101 /* ExperimentSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000111 /* ExperimentSupport.swift */; };
+		A10000000000000000000102 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000112 /* ReminderCell.swift */; };
+		A10000000000000000000103 /* StringIdentityExperimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000113 /* StringIdentityExperimentViewController.swift */; };
+		A10000000000000000000104 /* ManualCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000114 /* ManualCollectionViewController.swift */; };
+		B10000000000000000000001 /* UIKitLifecycleDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000011 /* UIKitLifecycleDemoUITests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B10000000000000000000051 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000041 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A10000000000000000000040;
+			remoteInfo = UIKitLifecycleDemo;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A10000000000000000000010 /* UIKitLifecycleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIKitLifecycleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -20,10 +35,23 @@
 		A10000000000000000000013 /* ReminderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewController.swift; sourceTree = "<group>"; };
 		A10000000000000000000014 /* ReminderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewController.swift; sourceTree = "<group>"; };
 		A10000000000000000000015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10000000000000000000111 /* ExperimentSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentSupport.swift; sourceTree = "<group>"; };
+		A10000000000000000000112 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
+		A10000000000000000000113 /* StringIdentityExperimentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringIdentityExperimentViewController.swift; sourceTree = "<group>"; };
+		A10000000000000000000114 /* ManualCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualCollectionViewController.swift; sourceTree = "<group>"; };
+		B10000000000000000000010 /* UIKitLifecycleDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIKitLifecycleDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10000000000000000000011 /* UIKitLifecycleDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitLifecycleDemoUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A10000000000000000000020 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B10000000000000000000021 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000031 /* UIKitLifecycleDemo */,
+				B10000000000000000000031 /* UIKitLifecycleDemoUITests */,
 				A10000000000000000000032 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,8 +75,12 @@
 			children = (
 				A10000000000000000000011 /* AppDelegate.swift */,
 				A10000000000000000000012 /* SceneDelegate.swift */,
+				A10000000000000000000111 /* ExperimentSupport.swift */,
 				A10000000000000000000013 /* ReminderListViewController.swift */,
 				A10000000000000000000014 /* ReminderDetailViewController.swift */,
+				A10000000000000000000112 /* ReminderCell.swift */,
+				A10000000000000000000113 /* StringIdentityExperimentViewController.swift */,
+				A10000000000000000000114 /* ManualCollectionViewController.swift */,
 				A10000000000000000000015 /* Info.plist */,
 			);
 			path = UIKitLifecycleDemo;
@@ -57,8 +90,17 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000010 /* UIKitLifecycleDemo.app */,
+				B10000000000000000000010 /* UIKitLifecycleDemoUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B10000000000000000000031 /* UIKitLifecycleDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000011 /* UIKitLifecycleDemoUITests.swift */,
+			);
+			path = UIKitLifecycleDemoUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -81,6 +123,24 @@
 			productReference = A10000000000000000000010 /* UIKitLifecycleDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B10000000000000000000040 /* UIKitLifecycleDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B10000000000000000000070 /* Build configuration list for PBXNativeTarget "UIKitLifecycleDemoUITests" */;
+			buildPhases = (
+				B10000000000000000000020 /* Sources */,
+				B10000000000000000000021 /* Frameworks */,
+				B10000000000000000000022 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B10000000000000000000050 /* PBXTargetDependency */,
+			);
+			name = UIKitLifecycleDemoUITests;
+			productName = UIKitLifecycleDemoUITests;
+			productReference = B10000000000000000000010 /* UIKitLifecycleDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -93,6 +153,10 @@
 				TargetAttributes = {
 					A10000000000000000000040 = {
 						CreatedOnToolsVersion = 26.2;
+					};
+					B10000000000000000000040 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = A10000000000000000000040;
 					};
 				};
 			};
@@ -110,12 +174,20 @@
 			projectRoot = "";
 			targets = (
 				A10000000000000000000040 /* UIKitLifecycleDemo */,
+				B10000000000000000000040 /* UIKitLifecycleDemoUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A10000000000000000000060 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B10000000000000000000022 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -131,12 +203,32 @@
 			files = (
 				A10000000000000000000001 /* AppDelegate.swift in Sources */,
 				A10000000000000000000002 /* SceneDelegate.swift in Sources */,
+				A10000000000000000000101 /* ExperimentSupport.swift in Sources */,
 				A10000000000000000000003 /* ReminderListViewController.swift in Sources */,
 				A10000000000000000000004 /* ReminderDetailViewController.swift in Sources */,
+				A10000000000000000000102 /* ReminderCell.swift in Sources */,
+				A10000000000000000000103 /* StringIdentityExperimentViewController.swift in Sources */,
+				A10000000000000000000104 /* ManualCollectionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B10000000000000000000020 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000001 /* UIKitLifecycleDemoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B10000000000000000000050 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A10000000000000000000040 /* UIKitLifecycleDemo */;
+			targetProxy = B10000000000000000000051 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A10000000000000000000080 /* Debug */ = {
@@ -314,6 +406,52 @@
 			};
 			name = Release;
 		};
+		B10000000000000000000082 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.UIKitLifecycleDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = UIKitLifecycleDemo;
+			};
+			name = Debug;
+		};
+		B10000000000000000000083 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.UIKitLifecycleDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = UIKitLifecycleDemo;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -331,6 +469,15 @@
 			buildConfigurations = (
 				A10000000000000000000080 /* Debug */,
 				A10000000000000000000081 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B10000000000000000000070 /* Build configuration list for PBXNativeTarget "UIKitLifecycleDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B10000000000000000000082 /* Debug */,
+				B10000000000000000000083 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
