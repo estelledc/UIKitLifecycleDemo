@@ -1,0 +1,47 @@
+CHANGELOG.md
+  s_9340ed41c548fc::t_6af3ed966a7f77 3-34,47
+Makefile
+  s_9340ed41c548fc::t_e94fc53d8efa5e 13,43-64
+README.md
+  s_9340ed41c548fc::t_e8079086621311 5,9-11,17,19-20,26,32-34,43,46-48,50-51,72,76,88,90,110-111,113,115-117,121-163,169-181,187-197,203-214,219-238,257,261-262,266
+UIKitLifecycleDemo.xcodeproj/project.pbxproj
+  s_9340ed41c548fc::t_493c440766d71e 14-18,21-30,38-43,54-60,68,78,81-83,93,98-105,126-143,157-160,177,190-196,206,209-219,225-232,409-454,476-484
+UIKitLifecycleDemo.xcodeproj/xcshareddata/xcschemes/UIKitLifecycleDemo.xcscheme
+  s_9340ed41c548fc::t_3468928ddffff4 1-99
+UIKitLifecycleDemo/ExperimentSupport.swift
+  s_9340ed41c548fc::t_6c15fc98d89f74 1-125
+UIKitLifecycleDemo/ManualCollectionViewController.swift
+  s_9340ed41c548fc::t_6c7d5cd77ab7c4 1-73
+UIKitLifecycleDemo/ReminderCell.swift
+  s_9340ed41c548fc::t_def5505f492eb2 1-27
+UIKitLifecycleDemo/ReminderDetailViewController.swift
+  s_9340ed41c548fc::t_3e37fc57e0d324 5-6,16,20-25,27-28,30,40-46,51,59,64-65,70,75,78-93,97-126,149-150,153-161
+UIKitLifecycleDemo/ReminderListViewController.swift
+  s_9340ed41c548fc::t_796238725c40ab 4,6-7,11,41,50,59-68,71,81,86-87,92,97-112,115,120-122,125-155,160,163,168,179,181-184,191,194-195,201,206,208,214-225,231,235,241,243,250,255,257,263,268,274,279,288,291,296,301-302,305,309,311-321,328-338,341-366,368,370-377,380,383-387,389-396,399-402,405-426,468-469,476,478
+UIKitLifecycleDemo/StringIdentityExperimentViewController.swift
+  s_9340ed41c548fc::t_32dfcff2eb84a6 1-69
+UIKitLifecycleDemoUITests/UIKitLifecycleDemoUITests.swift
+  s_9340ed41c548fc::t_07fcf1e26ce806 1-41
+docs/setup.md
+  s_9340ed41c548fc::t_1486823a262eef 102,114
+docs/xcode-observation-guide.md
+  s_9340ed41c548fc::t_bbaaa1362ac754 3,35-36,43,57,69,81,103,120-135,186-229,237,240-241
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "baf7b4bca799029514355b599e4e108dfe75415a",
+  "prompts": {},
+  "sessions": {
+    "s_9340ed41c548fc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9788d74c-dc80-4c60-8ed9-f8f7c8e0039a",
+        "model": "unknown"
+      },
+      "human_author": "estelledc <150260202+estelledc@users.noreply.github.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
