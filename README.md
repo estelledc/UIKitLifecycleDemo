@@ -166,52 +166,52 @@ bt 里看到的 UIKit 关键词：
 首次启动：
 
 ```text
-🧭 [ReminderListViewController] init
-🧭 [ReminderListViewController] loadView - before super
-🧭 [ReminderListViewController] loadView - after super
-🧭 [ReminderListViewController] viewDidLoad
-🧭 [ReminderListViewController] setupCollectionView
-🧭 [ReminderListViewController] listLayout
-🧭 [ReminderListViewController] configureDataSource
-🧭 [ReminderListViewController] applyInitialSnapshot
-🧭 [ReminderListViewController] applyCurrentSnapshot
-🧭 [ReminderListViewController] viewWillAppear
-🧭 [ReminderListViewController] CellRegistration
-🧭 [ReminderListViewController] viewDidAppear
-🧭 [NavStack] list viewDidAppear
+[ReminderListViewController] init
+[ReminderListViewController] loadView - before super
+[ReminderListViewController] loadView - after super
+[ReminderListViewController] viewDidLoad
+[ReminderListViewController] setupCollectionView
+[ReminderListViewController] listLayout
+[ReminderListViewController] configureDataSource
+[ReminderListViewController] applyInitialSnapshot
+[ReminderListViewController] applyCurrentSnapshot
+[ReminderListViewController] viewWillAppear
+[ReminderListViewController] CellRegistration
+[ReminderListViewController] viewDidAppear
+[NavStack] list viewDidAppear
 ```
 
 点击 cell：
 
 ```text
-🧭 [ReminderListViewController] collectionView(_:didSelectItemAt:)
-🧭 [NavStack] before show
-🧭 [ReminderDetailViewController] init(reminderTitle:onSave:)
-🧭 [ReminderListViewController] openDetail
-🧭 [ReminderDetailViewController] loadView
-🧭 [ReminderDetailViewController] viewDidLoad
-🧭 [ReminderListViewController] viewWillDisappear
-🧭 [ReminderDetailViewController] viewWillAppear
-🧭 [ReminderListViewController] viewDidDisappear
-🧭 [ReminderDetailViewController] viewDidAppear
-🧭 [NavStack] after detail appears
+[ReminderListViewController] collectionView(_:didSelectItemAt:)
+[NavStack] before show
+[ReminderDetailViewController] init(reminderTitle:onSave:)
+[ReminderListViewController] openDetail
+[ReminderDetailViewController] loadView
+[ReminderDetailViewController] viewDidLoad
+[ReminderListViewController] viewWillDisappear
+[ReminderDetailViewController] viewWillAppear
+[ReminderListViewController] viewDidDisappear
+[ReminderDetailViewController] viewDidAppear
+[NavStack] after detail appears
 ```
 
 点击 Save：
 
 ```text
-🧭 [ReminderDetailViewController] saveReminder
-🧭 [ReminderDetailViewController] saveReminder - about to call onSave
-🧭 [ReminderListViewController] onSave closure
-🧭 [ReminderListViewController] update(_:with:)
-🧭 [ReminderListViewController] applyCurrentSnapshot
-🧭 [ReminderDetailViewController] saveReminder - about to popViewController
-🧭 [NavStack] before pop
-🧭 [ReminderDetailViewController] viewWillDisappear
-🧭 [ReminderListViewController] viewWillAppear
-🧭 [ReminderDetailViewController] viewDidDisappear
-🧭 [ReminderListViewController] viewDidAppear
-🧭 [ReminderDetailViewController] deinit
+[ReminderDetailViewController] saveReminder
+[ReminderDetailViewController] saveReminder - about to call onSave
+[ReminderListViewController] onSave closure
+[ReminderListViewController] update(_:with:)
+[ReminderListViewController] applyCurrentSnapshot
+[ReminderDetailViewController] saveReminder - about to popViewController
+[NavStack] before pop
+[ReminderDetailViewController] viewWillDisappear
+[ReminderListViewController] viewWillAppear
+[ReminderDetailViewController] viewDidDisappear
+[ReminderListViewController] viewDidAppear
+[ReminderDetailViewController] deinit
 ```
 
 重点确认：返回 List 时，没有新的 List `viewDidLoad`，但会再次出现 List `viewWillAppear / viewDidAppear`。
@@ -234,7 +234,7 @@ bt 里看到的 UIKit 关键词：
 - `CHHapticPattern`
 - `Gesture gate timed out`
 
-先抓住以 `🧭` 开头的教学日志，再回头理解系统噪声。
+先抓住以 `[ClassName]` 开头的教学日志，再回头理解系统噪声。
 
 ## 用 Codex 学 iOS
 

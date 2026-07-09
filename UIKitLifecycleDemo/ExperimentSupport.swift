@@ -2,7 +2,7 @@ import UIKit
 
 enum DemoLog {
     static func print(_ owner: String, _ method: String, _ message: String) {
-        Swift.print("🧭 [\(owner)] \(method) - \(message)")
+        Swift.print("[\(owner)] \(method) - \(message)")
     }
 }
 

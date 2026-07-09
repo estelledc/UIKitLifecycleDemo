@@ -6,19 +6,8 @@
 
 ### Added
 
-- Experiments 菜单，用于对比 show / push / present、snapshot 更新模式、save 写法和 closure 捕获。
-- `ManualCollectionViewController`，用于观察手写 `UIViewController + UICollectionView` 的装配边界。
-- `StringIdentityExperimentViewController`，用于观察重复 String identity 的风险。
-- `ReminderCell` 自定义 cell，用于观察 init、configuration、reuse 和 deinit 日志。
-- `UIKitLifecycleDemoUITests`，自动验证点击第一条 reminder、编辑标题、Save 后列表刷新。
-- `make test-ui`，用于运行 UI 测试。
-
-## 1.1.0 - Unreleased
-
-### Added
-
 - 12 组可观测实验：Call Stack、`loadView`、布局生命周期、Navigation Stack、show/push/present、Diffable identity、snapshot 更新、cell 复用、target-action vs UIAction、closure 捕获、手动 collection view、UI Test。
-- 统一 `🧭 [ClassName] method - message` 教学日志前缀。
+- 统一 `[ClassName] method - message` 教学日志前缀。
 - `ReminderCell` 自定义 cell，打印 `init / updateConfiguration(using:) / prepareForReuse / deinit`。
 - `StringIdentityExperimentViewController`，安全展示重复 `String` identifier 风险。
 - `ManualCollectionViewController`，对比 `UICollectionViewController` 和手动 `UIViewController + UICollectionView`。

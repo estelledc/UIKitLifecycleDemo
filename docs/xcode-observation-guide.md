@@ -32,7 +32,7 @@
 9. 点击 Save。
 10. 回到 Console 看完整日志顺序。
 
-观察时先抓以 `🧭` 开头的日志。其他系统日志通常不是这个 Demo 的教学重点。
+观察时先抓以 `[ClassName]` 开头的日志。其他系统日志通常不是这个 Demo 的教学重点。
 
 ### 首次启动重点
 
@@ -203,7 +203,7 @@ UIControl sendAction
 
 1. Xcode 运行 App。
 2. 打开 Detail，点击 Save 返回。
-3. 看 Console 是否出现 `🧭 [ReminderDetailViewController] deinit`。
+3. 看 Console 是否出现 `[ReminderDetailViewController] deinit`。
 4. 点击 Xcode Debug Bar 里的 Memory Graph。
 5. 搜索 `ReminderDetailViewController`。
 
