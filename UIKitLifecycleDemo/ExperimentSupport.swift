@@ -1,11 +1,5 @@
 import UIKit
 
-enum DemoLog {
-    static func print(_ owner: String, _ method: String, _ message: String) {
-        Swift.print("[\(owner)] \(method) - \(message)")
-    }
-}
-
 enum Section {
     case main
 }
@@ -121,5 +115,5 @@ func printNavigationStack(from viewController: UIViewController, _ message: Stri
     let stack = viewController.navigationController?.viewControllers
         .map { String(describing: type(of: $0)) }
         .joined(separator: ", ") ?? "nil"
-    DemoLog.print("NavStack", message, "[\(stack)]")
+    DemoLog.print("NavStack", message, "[\(stack)]", category: .navStack)
 }

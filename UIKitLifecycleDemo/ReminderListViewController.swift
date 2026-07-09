@@ -126,13 +126,25 @@ final class ReminderListViewController: UICollectionViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addReminder))
         addButton.accessibilityIdentifier = "addReminderButton"
 
-        let experimentsButton = UIBarButtonItem(title: "Experiments", menu: experimentsMenu())
-        experimentsButton.accessibilityIdentifier = "experimentsButton"
-        navigationItem.rightBarButtonItems = [addButton, experimentsButton]
+        let learnButton = UIBarButtonItem(title: "Learn", menu: learnMenu())
+        learnButton.accessibilityIdentifier = "learnButton"
+        navigationItem.rightBarButtonItems = [addButton, learnButton]
+    }
+
+    private func learnMenu() -> UIMenu {
+        UIMenu(children: [
+            UIAction(title: "Guide", image: UIImage(systemName: "map")) { [weak self] _ in
+                self?.showGuidedExperiment()
+            },
+            UIAction(title: "Logs", image: UIImage(systemName: "list.bullet.rectangle")) { [weak self] _ in
+                self?.showLogPanel()
+            },
+            experimentsMenu()
+        ])
     }
 
     private func experimentsMenu() -> UIMenu {
-        UIMenu(children: [
+        UIMenu(title: "Experiments", children: [
             UIMenu(title: "Open Detail", options: .displayInline, children: [
                 UIAction(title: "Show") { [weak self] _ in self?.openFirstReminder(using: .show) },
                 UIAction(title: "Push") { [weak self] _ in self?.openFirstReminder(using: .push) },
@@ -153,6 +165,18 @@ final class ReminderListViewController: UICollectionViewController {
                 UIAction(title: "Manual UIViewController Version") { [weak self] _ in self?.showManualCollectionVersion() }
             ])
         ])
+    }
+
+    private func showLogPanel() {
+        DemoLog.print("ReminderListViewController", "showLogPanel", "present in-app log panel", category: .action)
+        let logPanel = UINavigationController(rootViewController: DemoLogPanelViewController())
+        present(logPanel, animated: true)
+    }
+
+    private func showGuidedExperiment() {
+        DemoLog.print("ReminderListViewController", "showGuidedExperiment", "present guided core tour", category: .guide)
+        let guide = UINavigationController(rootViewController: GuidedExperimentViewController())
+        present(guide, animated: true)
     }
 
     // 配置 collectionView 本体：继承 UICollectionViewController 后，它已经帮我们创建好了 collectionView。

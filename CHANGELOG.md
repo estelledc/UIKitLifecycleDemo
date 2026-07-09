@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.2.0 - Unreleased
+
+升级为 Guided UIKit Learning Lab。
+
+### Added
+
+- `DemoLogStore`：把教学日志保存为结构化事件，同时保留 Xcode Console 输出。
+- App 内 `Logs` 面板：支持分类筛选、暂停自动滚动、清空、复制可见日志、只看关键事件。
+- `GuidedExperimentViewController`：提供 5 分钟核心导览和高级实验导览。
+- Detail 页 `Use Example Title` 按钮，减少第一轮教学中的键盘和 haptic 噪声。
+- `docs/log-panel.md`、`docs/guided-learning.md`、`docs/call-stack-teaching.md`、`docs/computer-use-sop.md`、`docs/uikit-lifecycle-demo-1.2.0-roadmap.md`。
+
+### Changed
+
+- 导航栏实验入口改为 `Learn` 菜单，集中放置 Guide、Logs 和 Experiments。
+- README 改成课程入口，优先引导 App 内 Logs 和 Guided Tour。
+- 日志重新保持 `🧭 [Owner] method - message` 前缀，方便 Console 过滤。
+
 ## 1.1.0 - 2026-07-09
 
 扩展可观测实验版。
