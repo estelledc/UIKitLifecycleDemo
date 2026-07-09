@@ -1,0 +1,27 @@
+UIKitLifecycleDemo/DemoLogStore.swift
+  s_9340ed41c548fc::t_48bbb3ec0b5e10 145-162,173-176
+UIKitLifecycleDemo/ExperimentSupport.swift
+  s_9340ed41c548fc::t_43565f3b9aa540 118
+UIKitLifecycleDemo/GuidedExperiment.swift
+  s_9340ed41c548fc::t_9edf50b803fcb4 77-152
+UIKitLifecycleDemo/ReminderCell.swift
+  s_9340ed41c548fc::t_2ef0192bf3e798 6,15,20,25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "f9acc32338215682647e389798b0bde457dc7f45",
+  "prompts": {},
+  "sessions": {
+    "s_9340ed41c548fc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9788d74c-dc80-4c60-8ed9-f8f7c8e0039a",
+        "model": "unknown"
+      },
+      "human_author": "estelledc <150260202+estelledc@users.noreply.github.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
