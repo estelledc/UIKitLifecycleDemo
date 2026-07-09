@@ -17,6 +17,19 @@ final class ReminderDetailViewController: UIViewController {
         return textField
     }()
 
+    private lazy var useExampleTitleButton: UIButton = {
+        var configuration = UIButton.Configuration.bordered()
+        configuration.title = "Use Example Title"
+        configuration.image = UIImage(systemName: "text.cursor")
+        configuration.imagePadding = 8
+
+        let button = UIButton(configuration: configuration)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "useExampleTitleButton"
+        button.addTarget(self, action: #selector(useExampleTitle), for: .touchUpInside)
+        return button
+    }()
+
     init(
         reminderTitle: String,
         presentationMode: DetailPresentationMode,
@@ -126,19 +139,29 @@ final class ReminderDetailViewController: UIViewController {
         }
     }
 
-    // 文本框显示列表页传进来的 title，方便修改后回传。
+    // 文本框显示列表页传进来的 title；示例按钮减少教学时的键盘噪声。
     private func setupTextField() {
         view.backgroundColor = .systemBackground
         textField.text = reminderTitle
         textField.delegate = self
 
-        view.addSubview(textField)
+        let stack = UIStackView(arrangedSubviews: [textField, useExampleTitleButton])
+        stack.axis = .vertical
+        stack.spacing = 14
+        stack.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(stack)
 
         NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            textField.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24)
+            stack.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24)
         ])
+    }
+
+    @objc private func useExampleTitle() {
+        textField.text = "Buy groceries today"
+        DemoLog.print("ReminderDetailViewController", "useExampleTitle", "set textField.text to Buy groceries today", category: .action, isKeyEvent: true)
     }
 
     @objc private func saveReminder() {
