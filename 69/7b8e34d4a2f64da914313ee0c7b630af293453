@@ -1,0 +1,31 @@
+README.md
+  s_9340ed41c548fc::t_50e048811d5cd1 63,65,68-69
+UIKitLifecycleDemo/DemoLogPanelViewController.swift
+  s_9340ed41c548fc::t_6262148b407bfd 74,166,205-210
+UIKitLifecycleDemo/GuidedExperiment.swift
+  s_9340ed41c548fc::t_16f5b1563c9d66 18,35,49-50,64,97,113,128,143
+docs/computer-use-sop.md
+  s_9340ed41c548fc::t_a0ac292db05dcf 54,57
+docs/guided-learning.md
+  s_9340ed41c548fc::t_ec64b303693d6f 17,31,43,45,59
+docs/log-panel.md
+  s_9340ed41c548fc::t_602397dbb717e1 18,22-23,28-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "697b8e34d4a2f64da914313ee0c7b630af293453",
+  "prompts": {},
+  "sessions": {
+    "s_9340ed41c548fc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9788d74c-dc80-4c60-8ed9-f8f7c8e0039a",
+        "model": "unknown"
+      },
+      "human_author": "estelledc <150260202+estelledc@users.noreply.github.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
