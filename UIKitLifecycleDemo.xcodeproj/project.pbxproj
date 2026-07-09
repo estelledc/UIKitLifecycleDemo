@@ -11,6 +11,7 @@
 		A10000000000000000000002 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* SceneDelegate.swift */; };
 		A10000000000000000000003 /* ReminderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* ReminderListViewController.swift */; };
 		A10000000000000000000004 /* ReminderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* ReminderDetailViewController.swift */; };
+		A10000000000000000000105 /* DemoLogStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000115 /* DemoLogStore.swift */; };
 		A10000000000000000000101 /* ExperimentSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000111 /* ExperimentSupport.swift */; };
 		A10000000000000000000102 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000112 /* ReminderCell.swift */; };
 		A10000000000000000000103 /* StringIdentityExperimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000113 /* StringIdentityExperimentViewController.swift */; };
@@ -35,6 +36,7 @@
 		A10000000000000000000013 /* ReminderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewController.swift; sourceTree = "<group>"; };
 		A10000000000000000000014 /* ReminderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewController.swift; sourceTree = "<group>"; };
 		A10000000000000000000015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10000000000000000000115 /* DemoLogStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoLogStore.swift; sourceTree = "<group>"; };
 		A10000000000000000000111 /* ExperimentSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentSupport.swift; sourceTree = "<group>"; };
 		A10000000000000000000112 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		A10000000000000000000113 /* StringIdentityExperimentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringIdentityExperimentViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			children = (
 				A10000000000000000000011 /* AppDelegate.swift */,
 				A10000000000000000000012 /* SceneDelegate.swift */,
+				A10000000000000000000115 /* DemoLogStore.swift */,
 				A10000000000000000000111 /* ExperimentSupport.swift */,
 				A10000000000000000000013 /* ReminderListViewController.swift */,
 				A10000000000000000000014 /* ReminderDetailViewController.swift */,
@@ -203,6 +206,7 @@
 			files = (
 				A10000000000000000000001 /* AppDelegate.swift in Sources */,
 				A10000000000000000000002 /* SceneDelegate.swift in Sources */,
+				A10000000000000000000105 /* DemoLogStore.swift in Sources */,
 				A10000000000000000000101 /* ExperimentSupport.swift in Sources */,
 				A10000000000000000000003 /* ReminderListViewController.swift in Sources */,
 				A10000000000000000000004 /* ReminderDetailViewController.swift in Sources */,
