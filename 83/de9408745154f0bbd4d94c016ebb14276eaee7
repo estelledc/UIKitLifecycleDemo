@@ -1,0 +1,25 @@
+UIKitLifecycleDemo.xcodeproj/project.pbxproj
+  s_9340ed41c548fc::t_577b44b092c34d 15,41,83,213
+UIKitLifecycleDemo/DemoLogPanelViewController.swift
+  s_9340ed41c548fc::t_4840e51f84b449 1-234
+UIKitLifecycleDemo/ReminderListViewController.swift
+  s_9340ed41c548fc::t_7a2fe1ce29613c 129-131,134,136-144,167-172
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "83de9408745154f0bbd4d94c016ebb14276eaee7",
+  "prompts": {},
+  "sessions": {
+    "s_9340ed41c548fc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9788d74c-dc80-4c60-8ed9-f8f7c8e0039a",
+        "model": "unknown"
+      },
+      "human_author": "estelledc <150260202+estelledc@users.noreply.github.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
