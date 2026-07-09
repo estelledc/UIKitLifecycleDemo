@@ -1,0 +1,21 @@
+UIKitLifecycleDemo/ReminderDetailViewController.swift
+  s_9340ed41c548fc::t_aef9b8bc601cb5 20-32,142,148-153,156-158,162-166
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "348ff1cf058a5417c4ebd38c249e7b981c7eb532",
+  "prompts": {},
+  "sessions": {
+    "s_9340ed41c548fc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9788d74c-dc80-4c60-8ed9-f8f7c8e0039a",
+        "model": "unknown"
+      },
+      "human_author": "estelledc <150260202+estelledc@users.noreply.github.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
