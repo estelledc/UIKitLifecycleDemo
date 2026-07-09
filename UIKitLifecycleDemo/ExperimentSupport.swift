@@ -115,5 +115,5 @@ func printNavigationStack(from viewController: UIViewController, _ message: Stri
     let stack = viewController.navigationController?.viewControllers
         .map { String(describing: type(of: $0)) }
         .joined(separator: ", ") ?? "nil"
-    DemoLog.print("NavStack", message, "[\(stack)]")
+    DemoLog.print("NavStack", message, "[\(stack)]", category: .navStack)
 }

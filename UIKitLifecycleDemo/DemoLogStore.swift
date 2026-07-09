@@ -142,6 +142,24 @@ final class DemoLogStore {
     private static func inferCategory(owner: String, method: String, message: String) -> DemoLogCategory {
         let combined = "\(owner) \(method) \(message)"
 
+        if combined.contains("loadView")
+            || combined.contains("viewDidLoad")
+            || combined.contains("viewWillAppear")
+            || combined.contains("viewDidAppear")
+            || combined.contains("viewWillDisappear")
+            || combined.contains("viewDidDisappear") {
+            return .lifecycle
+        }
+        if combined.contains("viewWillLayoutSubviews")
+            || combined.contains("viewDidLayoutSubviews")
+            || combined.contains("viewSafeAreaInsetsDidChange")
+            || combined.contains("layoutSubviews")
+            || combined.contains("draw") {
+            return .layout
+        }
+        if combined.contains("deinit") {
+            return .memory
+        }
         if owner == "NavStack" {
             return .navStack
         }
@@ -152,7 +170,10 @@ final class DemoLogStore {
             if method.contains("Snapshot") || method.contains("snapshot") {
                 return .snapshot
             }
-            if method.contains("CellRegistration") || method.contains("DataSource") || method.contains("dataSource") {
+            if method.contains("CellRegistration") {
+                return .cell
+            }
+            if method.contains("DataSource") || method.contains("dataSource") {
                 return .dataSource
             }
             if method.contains("collectionView") || method.contains("didSelectItemAt") {
@@ -168,16 +189,6 @@ final class DemoLogStore {
                 return .action
             }
             return .detail
-        }
-        if combined.contains("viewWillLayoutSubviews")
-            || combined.contains("viewDidLayoutSubviews")
-            || combined.contains("viewSafeAreaInsetsDidChange")
-            || combined.contains("layoutSubviews")
-            || combined.contains("draw") {
-            return .layout
-        }
-        if combined.contains("deinit") {
-            return .memory
         }
         if combined.contains("Guide") || combined.contains("Guided") {
             return .guide
