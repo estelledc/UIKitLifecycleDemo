@@ -1,0 +1,25 @@
+UIKitLifecycleDemo/DemoLogPanelViewController.swift
+  s_9340ed41c548fc::t_7b870b5f868a09 57,60-61,110
+UIKitLifecycleDemo/GuidedExperimentViewController.swift
+  s_9340ed41c548fc::t_ff72f98c368cbd 33,36-37,46
+UIKitLifecycleDemoUITests/UIKitLifecycleDemoUITests.swift
+  s_9340ed41c548fc::t_13533246a85a3d 16-18,27-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "8faf93635fab13d839f52c9bf788c6bc0722ec50",
+  "prompts": {},
+  "sessions": {
+    "s_9340ed41c548fc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9788d74c-dc80-4c60-8ed9-f8f7c8e0039a",
+        "model": "unknown"
+      },
+      "human_author": "estelledc <150260202+estelledc@users.noreply.github.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
