@@ -54,9 +54,11 @@ final class DemoLogPanelViewController: UITableViewController {
 
     private func setupNavigation() {
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.leftBarButtonItem = UIBarButtonItem(systemItem: .close, primaryAction: UIAction { [weak self] _ in
+        let closeButton = UIBarButtonItem(title: "Done", primaryAction: UIAction { [weak self] _ in
             self?.dismiss(animated: true)
         })
+        closeButton.accessibilityIdentifier = "closeLogsButton"
+        navigationItem.leftBarButtonItem = closeButton
 
         let clearButton = UIBarButtonItem(title: "Clear", primaryAction: UIAction { [weak self] _ in
             DemoLogStore.shared.clear()
@@ -105,6 +107,7 @@ final class DemoLogPanelViewController: UITableViewController {
     }
 
     private func setupTableView() {
+        tableView.accessibilityIdentifier = "demoLogPanel"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "LogCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 76

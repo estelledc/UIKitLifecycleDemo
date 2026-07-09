@@ -30,9 +30,11 @@ final class GuidedExperimentViewController: UIViewController {
 
     private func setupNavigation() {
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.leftBarButtonItem = UIBarButtonItem(systemItem: .close, primaryAction: UIAction { [weak self] _ in
+        let closeButton = UIBarButtonItem(title: "Done", primaryAction: UIAction { [weak self] _ in
             self?.dismiss(animated: true)
         })
+        closeButton.accessibilityIdentifier = "closeGuideButton"
+        navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logs", primaryAction: UIAction { [weak self] _ in
             self?.openLogs()
         })
@@ -41,6 +43,7 @@ final class GuidedExperimentViewController: UIViewController {
 
     private func setupLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.accessibilityIdentifier = "guidedExperimentView"
         contentStack.translatesAutoresizingMaskIntoConstraints = false
         contentStack.axis = .vertical
         contentStack.spacing = 16
