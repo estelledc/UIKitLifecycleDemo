@@ -15,7 +15,7 @@ struct GuidedExperiment {
                 id: "launch-lifecycle",
                 title: "Step 1: 启动生命周期",
                 instruction: "先不要点任何 cell，只打开 Logs，观察 List 页面第一次出现。",
-                lookAt: "Logs -> Lifecycle / List",
+                lookAt: "Logs：先选 Lifecycle 看生命周期；再切到 List 看列表日志；也可以保持 All 并搜索 viewDidLoad。",
                 predictionQuestion: "viewDidLoad 是 controller 一创建就调用，还是 view 加载完成后调用？",
                 expectedLogs: [
                     "ReminderListViewController init",
@@ -32,7 +32,7 @@ struct GuidedExperiment {
                 id: "tap-cell",
                 title: "Step 2: 点击 cell",
                 instruction: "回到列表页，点击第一条 Buy groceries。",
-                lookAt: "Logs -> Delegate / Detail / Lifecycle",
+                lookAt: "Logs：先选 Delegate 看 didSelectItemAt；再切到 Detail 或 Lifecycle 看详情页出现顺序。",
                 predictionQuestion: "点击 cell 后，先出现 didSelectItemAt，还是 Detail viewDidLoad？",
                 expectedLogs: [
                     "collectionView(_:didSelectItemAt:)",
@@ -46,8 +46,8 @@ struct GuidedExperiment {
             GuidedStep(
                 id: "save",
                 title: "Step 3: Save",
-                instruction: "在 Detail 页修改标题，点击 Save。",
-                lookAt: "Logs -> Action / Closure",
+                instruction: "第一轮教学先点击 Use Example Title，再点击 Save；第二轮再手动输入标题。",
+                lookAt: "Logs：先选 Action 看 saveReminder；再切到 Closure 看 onSave 回传。",
                 predictionQuestion: "Save 是 List 调用的吗，还是按钮机制触发 Detail 的方法？",
                 expectedLogs: [
                     "saveReminder",
@@ -61,7 +61,7 @@ struct GuidedExperiment {
                 id: "pop-back",
                 title: "Step 4: pop 回 List",
                 instruction: "保存后不要继续点击，观察 Detail 消失和 List 重新出现。",
-                lookAt: "Logs -> Closure / Snapshot / NavStack / Memory",
+                lookAt: "Logs：先选 Closure 看 onSave；再分别切到 Snapshot、NavStack、Memory 看刷新、返回和 deinit。",
                 predictionQuestion: "返回 List 时，List.viewDidLoad 会不会再次出现？",
                 expectedLogs: [
                     "onSave closure",
@@ -94,7 +94,7 @@ struct GuidedExperiment {
                 id: "snapshot-update",
                 title: "Step 6: Snapshot 更新",
                 instruction: "依次运行 Learn -> Experiments -> Snapshot 里的 Full Apply、Reload Item、Reconfigure Item。",
-                lookAt: "Logs -> Snapshot / Cell",
+                lookAt: "Logs：先选 Snapshot 看 apply；再切到 Cell 看 cell 配置次数。",
                 predictionQuestion: "改一条数据时，必须重建整个列表吗？",
                 expectedLogs: [
                     "runSnapshotExperiment",
@@ -110,7 +110,7 @@ struct GuidedExperiment {
                 id: "presentation",
                 title: "Step 7: Show / Push / Present",
                 instruction: "分别运行 Learn -> Experiments -> Open Detail 里的 Show、Push、Present。",
-                lookAt: "Logs -> NavStack / Lifecycle",
+                lookAt: "Logs：先选 NavStack 看栈变化；再切到 Lifecycle 看页面出现和消失。",
                 predictionQuestion: "Present 出来的 Detail 会不会进入原来的 navigation stack？",
                 expectedLogs: [
                     "before show / push / present",
@@ -125,7 +125,7 @@ struct GuidedExperiment {
                 id: "closure-memory",
                 title: "Step 8: Closure memory",
                 instruction: "切换 Learn -> Experiments -> Toggle Closure，再打开详情页并保存返回。",
-                lookAt: "Logs -> Closure / Memory",
+                lookAt: "Logs：先选 Closure 看回传；再切到 Memory 看 deinit。",
                 predictionQuestion: "强捕获 self 会不会影响 Detail 或 List 的释放时机？",
                 expectedLogs: [
                     "toggleClosureCaptureMode",
@@ -140,7 +140,7 @@ struct GuidedExperiment {
                 id: "manual-collection",
                 title: "Step 9: 手动 CollectionView 对照",
                 instruction: "打开 Learn -> Experiments -> Manual UIViewController Version，对照 UICollectionViewController 版本。",
-                lookAt: "Logs -> Lifecycle / DataSource / Layout",
+                lookAt: "Logs：先选 Lifecycle 看页面创建；再分别切到 DataSource 和 Layout 看列表搭建。",
                 predictionQuestion: "不继承 UICollectionViewController 时，collectionView 还会自动存在吗？",
                 expectedLogs: [
                     "ManualCollectionViewController",

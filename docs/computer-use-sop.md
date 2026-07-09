@@ -51,10 +51,10 @@ Predict -> Point -> Act -> Pause -> Observe -> Explain -> Ask -> Continue
 2. 打开 `Learn -> Logs`。
 3. Filter 选 `Lifecycle`，看启动生命周期。
 4. 回到 List，点击 `Buy groceries`。
-5. Filter 选 `Delegate / Detail`，看点击和 Detail 生命周期。
+5. Filter 先选 `Delegate` 看点击回调，再切到 `Detail` 看详情页生命周期。
 6. 点击 `Use Example Title`。
 7. 点击 `Save`。
-8. Filter 选 `Action / Closure / Snapshot / Memory`。
+8. Filter 先选 `Action`，再分别切到 `Closure`、`Snapshot`、`Memory`。
 9. 对比：返回 List 时没有新的 List `viewDidLoad`。
 
 ## 第二轮：Xcode Call Stack

@@ -60,10 +60,12 @@ make build SIMULATOR_NAME="iPhone 16 Pro"
 1. 启动 App。
 2. 点击右上角 `Learn`。
 3. 点击 `Logs`。
-4. 用 Filter 选择 `Lifecycle / Delegate / Action / Closure / Snapshot / Cell / NavStack`。
+4. 用 Filter 一次选择一个分类，例如先选 `Lifecycle`，再分别切到 `Delegate`、`Action`、`Closure`、`Snapshot`、`Cell`、`NavStack`。
 5. 打开 `Only Key Events` 只看关键事件。
-6. 点击 `Pause` 暂停自动滚动。
+6. 点击 `Pause Scroll` 暂停自动滚动；再次点击 `Resume Scroll` 恢复自动滚动。
 7. 点击 `Copy` 复制当前可见日志给 ChatGPT 分析。
+
+注意：当前 Log Panel 的 Filter 一次只能选择一个分类。需要组合观察时，可以保持 `All` 并使用 Search 搜索 `viewDidLoad`、`saveReminder` 等关键词，或分别切换分类。
 
 详细说明见 [docs/log-panel.md](docs/log-panel.md)。
 

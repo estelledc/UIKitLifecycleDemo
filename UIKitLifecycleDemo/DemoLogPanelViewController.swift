@@ -71,7 +71,7 @@ final class DemoLogPanelViewController: UITableViewController {
         })
         copyButton.accessibilityIdentifier = "copyVisibleLogsButton"
 
-        let pauseButton = UIBarButtonItem(title: "Pause", primaryAction: UIAction { [weak self] action in
+        let pauseButton = UIBarButtonItem(title: "Pause Scroll", primaryAction: UIAction { [weak self] action in
             self?.toggleAutoScroll(action)
         })
         pauseButton.accessibilityIdentifier = "pauseLogsButton"
@@ -163,7 +163,7 @@ final class DemoLogPanelViewController: UITableViewController {
 
     private func toggleAutoScroll(_ action: UIAction) {
         isAutoScrollPaused.toggle()
-        action.title = isAutoScrollPaused ? "Continue" : "Pause"
+        action.title = isAutoScrollPaused ? "Resume Scroll" : "Pause Scroll"
         if !isAutoScrollPaused {
             scrollToBottom()
         }
@@ -202,7 +202,12 @@ final class DemoLogPanelViewController: UITableViewController {
     }
 
     private func copyVisibleLogs() {
-        UIPasteboard.general.string = visibleEvents.map(\.consoleLine).joined(separator: "\n")
+        let copiedText = visibleEvents
+            .map { event in
+                "#\(event.sequence) [\(event.category.title)] \(event.consoleLine)"
+            }
+            .joined(separator: "\n")
+        UIPasteboard.general.string = copiedText
 
         let alert = UIAlertController(title: "Copied", message: "Visible logs are on the pasteboard.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
