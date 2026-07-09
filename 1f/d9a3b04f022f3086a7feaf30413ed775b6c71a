@@ -1,0 +1,27 @@
+UIKitLifecycleDemo.xcodeproj/project.pbxproj
+  s_9340ed41c548fc::t_9006113c6b8023 16-17,44-45,88-89,220-221
+UIKitLifecycleDemo/GuidedExperiment.swift
+  s_9340ed41c548fc::t_5d788b0148f54a 1-92
+UIKitLifecycleDemo/GuidedExperimentViewController.swift
+  s_9340ed41c548fc::t_b77d7b599048e6 1-154
+UIKitLifecycleDemo/ReminderListViewController.swift
+  s_9340ed41c548fc::t_3ba2786e3aa5d3 136-138,176-181
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "1fd9a3b04f022f3086a7feaf30413ed775b6c71a",
+  "prompts": {},
+  "sessions": {
+    "s_9340ed41c548fc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9788d74c-dc80-4c60-8ed9-f8f7c8e0039a",
+        "model": "unknown"
+      },
+      "human_author": "estelledc <150260202+estelledc@users.noreply.github.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
