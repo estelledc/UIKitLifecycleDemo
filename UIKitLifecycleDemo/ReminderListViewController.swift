@@ -133,6 +133,9 @@ final class ReminderListViewController: UICollectionViewController {
 
     private func learnMenu() -> UIMenu {
         UIMenu(children: [
+            UIAction(title: "Guide", image: UIImage(systemName: "map")) { [weak self] _ in
+                self?.showGuidedExperiment()
+            },
             UIAction(title: "Logs", image: UIImage(systemName: "list.bullet.rectangle")) { [weak self] _ in
                 self?.showLogPanel()
             },
@@ -168,6 +171,12 @@ final class ReminderListViewController: UICollectionViewController {
         DemoLog.print("ReminderListViewController", "showLogPanel", "present in-app log panel", category: .action)
         let logPanel = UINavigationController(rootViewController: DemoLogPanelViewController())
         present(logPanel, animated: true)
+    }
+
+    private func showGuidedExperiment() {
+        DemoLog.print("ReminderListViewController", "showGuidedExperiment", "present guided core tour", category: .guide)
+        let guide = UINavigationController(rootViewController: GuidedExperimentViewController())
+        present(guide, animated: true)
     }
 
     // 配置 collectionView 本体：继承 UICollectionViewController 后，它已经帮我们创建好了 collectionView。
