@@ -1,0 +1,27 @@
+CHANGELOG.md
+  s_9340ed41c548fc::t_aed8acbfc1a8e3 10
+README.md
+  s_9340ed41c548fc::t_314319be5546ab 169-181,187-197,203-214,237
+UIKitLifecycleDemo/ExperimentSupport.swift
+  s_9340ed41c548fc::t_c9cf7f061823fc 5
+docs/xcode-observation-guide.md
+  s_9340ed41c548fc::t_d78b4c4dbdfc3a 35,206
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "12f32f98aeb03e2c26c1a0422402bd76d2a25bab",
+  "prompts": {},
+  "sessions": {
+    "s_9340ed41c548fc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9788d74c-dc80-4c60-8ed9-f8f7c8e0039a",
+        "model": "unknown"
+      },
+      "human_author": "estelledc <150260202+estelledc@users.noreply.github.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
