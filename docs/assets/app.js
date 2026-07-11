@@ -56,6 +56,76 @@
     });
   });
 
+  const saveLab = document.querySelector("[data-save-lab]");
+  const runSave = saveLab?.querySelector("[data-run-save]");
+  const saveOutput = saveLab?.querySelector("[data-save-output]");
+  const saveSteps = Array.from(saveLab?.querySelectorAll("[data-mechanism]") || []);
+  let saveTimers = [];
+
+  function clearSaveTimers() {
+    saveTimers.forEach((timer) => window.clearTimeout(timer));
+    saveTimers = [];
+  }
+
+  function resetSaveTrace() {
+    saveSteps.forEach((step) => {
+      step.classList.remove("is-active", "is-complete");
+      step.removeAttribute("aria-current");
+    });
+  }
+
+  function activateSaveStep(index) {
+    saveSteps.forEach((step, stepIndex) => {
+      step.classList.toggle("is-complete", stepIndex < index);
+      step.classList.toggle("is-active", stepIndex === index);
+      if (stepIndex === index) step.setAttribute("aria-current", "step");
+      else step.removeAttribute("aria-current");
+    });
+    const active = saveSteps[index];
+    if (active && saveOutput) {
+      const label = active.querySelector("span")?.textContent || `step ${index + 1}`;
+      const method = active.querySelector("code")?.textContent || "";
+      saveOutput.textContent = `${label} · ${method}`;
+    }
+  }
+
+  function finishSaveTrace() {
+    saveSteps.forEach((step) => {
+      step.classList.remove("is-active");
+      step.classList.add("is-complete");
+      step.removeAttribute("aria-current");
+    });
+    saveLab?.removeAttribute("aria-busy");
+    if (runSave) {
+      runSave.disabled = false;
+      runSave.textContent = "Replay Save trace";
+    }
+    if (saveOutput) saveOutput.textContent = "Save 完成：closure 回传后，列表 snapshot 已刷新。";
+  }
+
+  if (saveLab && runSave && saveSteps.length === 4) {
+    saveLab.classList.add("is-enhanced");
+    runSave.hidden = false;
+    runSave.addEventListener("click", () => {
+      clearSaveTimers();
+      resetSaveTrace();
+      runSave.disabled = true;
+      runSave.textContent = "Running Save trace…";
+      saveLab.setAttribute("aria-busy", "true");
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        saveSteps.forEach((_, index) => activateSaveStep(index));
+        finishSaveTrace();
+        return;
+      }
+
+      saveSteps.forEach((_, index) => {
+        saveTimers.push(window.setTimeout(() => activateSaveStep(index), index * 480));
+      });
+      saveTimers.push(window.setTimeout(finishSaveTrace, saveSteps.length * 480));
+    });
+  }
+
   media.addEventListener("change", () => {
     if (!readTheme()) updateButtons();
   });

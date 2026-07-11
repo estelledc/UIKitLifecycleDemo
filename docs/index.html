@@ -4,9 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="UIKit Lifecycle Lab：把生命周期、delegate、target-action、closure 与 cell 复用变成可观察、可验证的学习系统。">
-  <meta name="author" content="Jason">
+  <meta name="author" content="Jason Xun">
+  <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#f4f7fb">
-  <title>UIKit Lifecycle Lab · Jason Product Systems</title>
+  <title>UIKit Lifecycle Lab · Jason Xun</title>
 
   <link rel="canonical" href="https://estelledc.github.io/UIKitLifecycleDemo/">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
@@ -17,7 +18,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:site_name" content="Jason Product Systems">
+  <meta property="og:site_name" content="Jason Xun · Product Systems Builder">
   <meta property="og:title" content="UIKit Lifecycle Lab · 把隐式调用变成证据链">
   <meta property="og:description" content="9 个引导步骤、14 类结构化日志与 2 条 UI 测试流程组成的纯 UIKit 学习实验室。">
   <meta property="og:url" content="https://estelledc.github.io/UIKitLifecycleDemo/">
@@ -36,9 +37,9 @@
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://estelledc.github.io/#jason",
-        "name": "Jason",
-        "url": "https://estelledc.github.io/",
+        "@id": "https://estelledc.github.io/#person",
+        "name": "Jason Xun",
+        "url": "https://estelledc.github.io/about/",
         "sameAs": ["https://github.com/estelledc"]
       },
       {
@@ -51,7 +52,7 @@
         "codeRepository": "https://github.com/estelledc/UIKitLifecycleDemo",
         "programmingLanguage": "Swift",
         "runtimePlatform": "iOS Simulator",
-        "author": {"@id": "https://estelledc.github.io/#jason"},
+        "author": {"@id": "https://estelledc.github.io/#person"},
         "inLanguage": ["zh-Hans", "en"],
         "dateModified": "2026-07-11",
         "isAccessibleForFree": true
@@ -66,8 +67,8 @@
   <header class="jx-site-header">
     <div class="jx-site-header__inner">
       <a class="jx-site-header__identity" href="#main" aria-label="回到 UIKit Lifecycle Lab 首页">
-        <strong>UIKit Lifecycle Lab</strong>
-        <span>observable UIKit · code-first</span>
+        <strong>Jason Xun · UIKit Lifecycle Lab</strong>
+        <span>observable UIKit · code-first experiment</span>
       </a>
       <nav class="jx-site-nav" aria-label="作品集导航">
         <div class="jx-site-nav__links">
@@ -96,7 +97,7 @@
       <div class="case-hero__copy">
         <div class="case-hero__meta">
           <span class="jx-chip" data-state="building">Building</span>
-          <span class="jx-eyebrow"><span class="jx-eyebrow__rule"></span>Jason product system</span>
+          <span class="jx-eyebrow"><span class="jx-eyebrow__rule"></span>Jason Xun product system</span>
         </div>
         <p class="case-kicker">UIKit · Guided Learning · Observable Runtime</p>
         <h1 id="case-title">把 UIKit 的隐式调用，变成一条可以观察的证据链</h1>
@@ -109,19 +110,34 @@
         </div>
       </div>
 
-      <div class="runtime-card" aria-label="基于源码的 UIKit 启动生命周期预期顺序">
+      <div class="runtime-card" data-save-lab aria-labelledby="runtime-title">
         <div class="runtime-card__bar">
-          <span>RUNTIME TRACE</span>
-          <span class="runtime-live">EXPECTED ORDER</span>
+          <span>SAVE TRACE / REAL UI + SOURCE PATH</span>
+          <span class="runtime-live">PROGRESSIVE LAB</span>
         </div>
-        <ol class="runtime-trace">
-          <li><span>001</span><code>init</code><small>business creates controller</small></li>
-          <li><span>002</span><code>loadView</code><small>UIKit requests the view</small></li>
-          <li><span>003</span><code>viewDidLoad</code><small>first load completed</small></li>
-          <li><span>004</span><code>viewWillAppear</code><small>screen is about to show</small></li>
-          <li><span>005</span><code>viewDidAppear</code><small>screen became visible</small></li>
-        </ol>
-        <p>基于 <code>GuidedExperiment.coreTour</code> 与源码日志点整理，不冒充一次录制结果。</p>
+        <div class="runtime-card__body">
+          <figure class="runtime-device">
+            <img src="assets/uikit-list.png" width="1206" height="2622" alt="iPhone 17 Pro Simulator 中用于 Save 实验的提醒列表" loading="eager" decoding="async" fetchpriority="high">
+            <figcaption>REAL SIMULATOR / iPhone 17 Pro</figcaption>
+          </figure>
+          <div class="runtime-sequence">
+            <p class="runtime-sequence__title" id="runtime-title">一次编辑与 Save，穿过四种调用机制。</p>
+            <button type="button" class="runtime-run" data-run-save hidden>Run Save trace</button>
+            <ol class="runtime-trace" data-save-trace>
+              <li data-mechanism="delegate"><span>01 · delegate</span><code>didSelectItemAt</code><small>列表把选择回调给业务控制器</small></li>
+              <li data-mechanism="lifecycle"><span>02 · lifecycle</span><code>viewDidLoad</code><small>UIKit 请求编辑页完成首次加载</small></li>
+              <li data-mechanism="target-action"><span>03 · target-action</span><code>saveReminder</code><small>Save 按钮触发注册的 action</small></li>
+              <li data-mechanism="closure"><span>04 · closure</span><code>onSave → snapshot</code><small>业务 closure 回传并刷新列表</small></li>
+            </ol>
+            <output class="runtime-output" data-save-output aria-live="polite">静态顺序已完整展示。</output>
+            <noscript><p class="runtime-noscript">JavaScript 未启用：四步调用链仍可阅读，逐步点亮演示不可用。</p></noscript>
+          </div>
+        </div>
+        <a class="runtime-test" href="https://github.com/estelledc/UIKitLifecycleDemo/blob/main/UIKitLifecycleDemoUITests/UIKitLifecycleDemoUITests.swift">
+          <strong>2 / 2 UI TEST PASS</strong>
+          <span>2026-07-11 · local iPhone 17 Pro Simulator</span>
+          <small>9.456s edit/save · 27.483s Logs/Guide · source ↗</small>
+        </a>
       </div>
     </section>
 
@@ -174,7 +190,7 @@
         <div class="jx-case-section__body observation-grid">
           <figure class="device-shot">
             <div class="device-shot__screen">
-              <img src="assets/uikit-list.png" width="1206" height="2622" alt="iPhone 17 Pro 模拟器中的 UIKitLifecycleDemo 提醒列表首页" loading="lazy">
+              <img src="assets/uikit-list.png" width="1206" height="2622" alt="iPhone 17 Pro 模拟器中的 UIKitLifecycleDemo 提醒列表首页" loading="lazy" decoding="async">
             </div>
             <figcaption>真实 Simulator 构建截图，不是网页 mockup。业务外壳保持简单，把注意力留给 Learn、Logs 与调用链。</figcaption>
           </figure>
@@ -196,6 +212,11 @@
         <h2 class="jx-case-section__heading" id="evidence-title">Evidence / 证据</h2>
         <div class="jx-case-section__body">
           <p>展示页只陈述能够从当前仓库或本地构建直接复核的事实。</p>
+          <div class="test-proof" aria-label="最近 UI Test 验证记录">
+            <span>LAST VERIFIED · 2026-07-11</span>
+            <strong>2 / 2 UI Test passed</strong>
+            <p>本地 iPhone 17 Pro Simulator：<code>testEditFirstReminderTitle</code> 9.456s；<code>testOpenLogsAndGuide</code> 27.483s。来源是当前 XCTest 文件与本次本地运行，不代表完整回归覆盖。</p>
+          </div>
           <ul class="jx-evidence-list evidence-list">
             <li><a href="https://github.com/estelledc/UIKitLifecycleDemo/blob/main/UIKitLifecycleDemo/GuidedExperiment.swift"><span><strong>9 个 GuidedStep</strong><small>包括四步核心路线与五个高级观察步骤</small></span></a></li>
             <li><a href="https://github.com/estelledc/UIKitLifecycleDemo/blob/main/UIKitLifecycleDemo/DemoLogStore.swift"><span><strong>14 个 DemoLogCategory</strong><small>每条事件含序号、时间、owner、method、message 与关键标记</small></span></a></li>
@@ -236,7 +257,7 @@ make test-ui</code></pre>
   <footer class="jx-footer">
     <div class="jx-footer__colophon">
       <strong>UIKit Lifecycle Lab</strong>
-      <span lang="en">A Jason product system</span>
+      <span lang="en">A Jason Xun product system</span>
     </div>
     <nav class="jx-footer__index" aria-label="页脚导航">
       <a href="#system">system</a>

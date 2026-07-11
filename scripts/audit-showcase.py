@@ -100,6 +100,16 @@ def audit() -> list[str]:
         '<meta name="twitter:card" content="summary_large_image">',
         'class="jx-skip-link"',
         'data-theme-toggle aria-pressed="false"',
+        'data-save-lab',
+        'data-run-save hidden',
+        'data-mechanism="delegate"',
+        'data-mechanism="lifecycle"',
+        'data-mechanism="target-action"',
+        'data-mechanism="closure"',
+        "2 / 2 UI TEST PASS",
+        "LAST VERIFIED · 2026-07-11",
+        "9.456s edit/save · 27.483s Logs/Guide",
+        "JavaScript 未启用",
     ]
     for marker in required_markers:
         if marker not in html:
@@ -123,6 +133,10 @@ def audit() -> list[str]:
             structured = json.loads(parser.json_ld[0])
             if structured.get("@context") != "https://schema.org":
                 errors.append("index.html: unexpected JSON-LD context")
+            graph = structured.get("@graph", [])
+            person = next((item for item in graph if item.get("@type") == "Person"), {})
+            if person.get("@id") != "https://estelledc.github.io/#person" or person.get("name") != "Jason Xun":
+                errors.append("index.html: shared Jason Xun #person identity is missing")
         except json.JSONDecodeError as error:
             errors.append(f"index.html: invalid JSON-LD: {error}")
 
@@ -131,6 +145,10 @@ def audit() -> list[str]:
             errors.append(f"index.html: image missing alt: {image.get('src', '<unknown>')}")
         if not image.get("width") or not image.get("height"):
             errors.append(f"index.html: image missing width/height: {image.get('src', '<unknown>')}")
+        if image.get("loading") not in {"eager", "lazy"}:
+            errors.append(f"index.html: image missing loading strategy: {image.get('src', '<unknown>')}")
+        if image.get("decoding") != "async":
+            errors.append(f"index.html: image missing async decoding: {image.get('src', '<unknown>')}")
 
     for raw in parser.refs:
         if raw.startswith("#"):
@@ -164,14 +182,35 @@ def audit() -> list[str]:
             errors.append(str(error))
 
     version = (DOCS / "assets" / "jx" / "VERSION").read_text(encoding="utf-8").strip()
-    if version != "2.0.0":
-        errors.append(f"Jason DS version is {version}, expected 2.0.0")
+    if version != "2.1.0":
+        errors.append(f"Jason DS version is {version}, expected 2.1.0")
 
     css = (DOCS / "assets" / "style.css").read_text(encoding="utf-8")
     if "prefers-reduced-motion: reduce" not in css:
         errors.append("style.css: missing reduced-motion support")
+    if "@media (max-width: 420px)" not in css or ".runtime-card__body { grid-template-columns: 1fr; }" not in css:
+        errors.append("style.css: missing 320px Save-trace layout contract")
     if "focus-visible" not in (DOCS / "assets" / "jx" / "base.css").read_text(encoding="utf-8"):
         errors.append("Jason DS base: missing focus-visible styles")
+
+    app_js = (DOCS / "assets" / "app.js").read_text(encoding="utf-8")
+    for marker in (
+        "activateSaveStep",
+        "finishSaveTrace",
+        "prefers-reduced-motion: reduce",
+        'setAttribute("aria-busy", "true")',
+    ):
+        if marker not in app_js:
+            errors.append(f"app.js: progressive Save trace marker missing: {marker}")
+
+    hero_image = re.search(r'<img[^>]+src="assets/uikit-list.png"[^>]*>', html)
+    if not hero_image:
+        errors.append("index.html: real Simulator image is missing")
+    else:
+        image_tag = hero_image.group(0)
+        for marker in ('loading="eager"', 'decoding="async"', 'fetchpriority="high"'):
+            if marker not in image_tag:
+                errors.append(f"index.html: hero Simulator image missing {marker}")
 
     published_text = "\n".join(
         path.read_text(encoding="utf-8", errors="ignore")
@@ -184,6 +223,8 @@ def audit() -> list[str]:
 
     if not (DOCS / ".nojekyll").is_file():
         errors.append("missing docs/.nojekyll")
+    if not (DOCS / "404.html").is_file():
+        errors.append("missing docs/404.html")
     if CANONICAL not in (DOCS / "sitemap.xml").read_text(encoding="utf-8"):
         errors.append("sitemap.xml: canonical URL missing")
     if "sitemap.xml" not in (DOCS / "robots.txt").read_text(encoding="utf-8"):
