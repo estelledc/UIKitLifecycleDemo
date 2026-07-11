@@ -1,6 +1,54 @@
-# UIKitLifecycleDemo
+# UIKit Lifecycle Lab
 
-一个纯 UIKit、纯代码的中文学习实验室。它不是提醒事项业务 App，而是一台“UIKit 显微镜”：你可以在 App 内 Logs、Xcode Console、断点和 Call Stack 里观察 UIKit 什么时候自动调用生命周期、delegate、target-action、closure 回传、snapshot 刷新和 cell 复用。
+一个纯 UIKit、纯代码的中文学习实验室。它不是提醒事项业务 App，而是一台“UIKit 显微镜”：用 Guided Steps、结构化日志、Xcode Call Stack 和 UI Test，观察 UIKit 什么时候自动调用生命周期、delegate、target-action、closure 回传、snapshot 刷新和 cell 复用。
+
+> **English summary:** A code-first UIKit learning lab that makes framework-driven behavior observable through guided experiments, structured logs, call stacks, and UI tests.
+
+[公开案例页](https://estelledc.github.io/UIKitLifecycleDemo/) · [Jason Hub](https://estelledc.github.io/) · [About](https://estelledc.github.io/about/) · [Resume](https://estelledc.github.io/resume/)
+
+## 公开案例
+
+### Problem
+
+UIKit 的很多关键方法不是业务代码直接调用的。只读 `viewDidLoad`、`didSelectItemAt` 或 `saveReminder` 的定义，很容易把框架生命周期、delegate 回调、按钮事件和业务 closure 混在一起。
+
+### Role
+
+- **Jason**：定义学习目标、选择观察机制、编排验证路线，并用真实 Xcode / Simulator 结果验收。
+- **Codex / AI**：辅助搭建 Demo、实现结构化日志与文档、迭代自动化测试。
+- **Xcode / Simulator / XCTest**：提供最终运行证据；README 中的预期顺序不替代真实构建与观察。
+
+### System
+
+```text
+Predict -> Run -> Observe -> Verify -> Recap
+  Guide     App      Logs     Stack/Test   复盘
+```
+
+1. `GuidedStep` 把操作、观察位置、预测问题、预期日志和胜利条件放在同一张训练卡里。
+2. `DemoLogStore` 同时保存结构化事件并输出 Xcode Console。
+3. App 内 Log Panel 支持分类、搜索、关键事件、暂停滚动与复制。
+4. Call Stack 回答“谁触发”，UI Test 检查关键用户流程。
+
+### Evidence
+
+| 可核验事实 | 当前仓库依据 |
+|---|---|
+| 9 个引导步骤 | `UIKitLifecycleDemo/GuidedExperiment.swift` |
+| 14 类结构化日志 | `UIKitLifecycleDemo/DemoLogStore.swift` |
+| 2 条 UI Test 流程 | `UIKitLifecycleDemoUITests/UIKitLifecycleDemoUITests.swift` |
+| 纯 UIKit、纯代码入口 | `SceneDelegate -> UINavigationController -> ReminderListViewController` |
+| 可重复构建 | `Makefile` 中的 `build / run / test-ui` |
+
+这些数字描述当前实现范围，不代表学习效果。
+
+### Limitations
+
+- 这是学习实验室，不是生产级提醒事项 App。
+- 不包含网络、持久化、EventKit 或真实业务状态。
+- Guide 描述预期观察，不会生成或伪造日志。
+- 两条 UI Test 只覆盖核心编辑流程和 Guide / Logs 入口，尚未覆盖全部高级实验。
+- 项目不声称仅凭阅读或运行 Demo 就能掌握 UIKit。
 
 ## 5 分钟 Guided Tour
 
@@ -20,18 +68,18 @@
 你最终要亲眼确认：
 
 - `viewDidLoad` 只在 view 第一次加载后执行。
-- `viewWillAppear / viewDidAppear` 每次页面重新出现都会执行。
+- `viewWillAppear / viewDidAppear` 在页面重新出现时再次执行。
 - `didSelectItemAt` 是 UIKit 收到 cell 点击后的 delegate 回调。
-- `saveReminder` 是按钮事件通过 target-action 或 UIAction 触发。
+- `saveReminder` 由 target-action 或 UIAction 触发。
 - `onSave closure` 是 Detail 把编辑结果交回 List 的业务通道。
-- Detail pop 后出现 `deinit`，说明详情页释放了。
+- Detail pop 后出现 `deinit`，说明该详情页实例释放。
 
-## 如何运行
+完整说明见 [docs/guided-learning.md](docs/guided-learning.md)。
+
+## 本地运行
 
 ```bash
-cd explorations/_active/UIKitLifecycleDemo
 make build
-make open
 make run
 make test-ui
 ```
@@ -51,57 +99,21 @@ make build SIMULATOR_NAME="iPhone 16 Pro"
 
 环境准备见 [docs/setup.md](docs/setup.md)。
 
-## 如何打开 Logs
+## 如何观察
 
-像看慢放录像一样，Logs 面板让你不用追着 Xcode Console 跑。
+### App 内 Logs
 
-操作：
-
-1. 启动 App。
-2. 点击右上角 `Learn`。
-3. 点击 `Logs`。
-4. 用 Filter 一次选择一个分类，例如先选 `Lifecycle`，再分别切到 `Delegate`、`Action`、`Closure`、`Snapshot`、`Cell`、`NavStack`。
-5. 打开 `Only Key Events` 只看关键事件。
-6. 点击 `Pause Scroll` 暂停自动滚动；再次点击 `Resume Scroll` 恢复自动滚动。
-7. 点击 `Copy` 复制当前可见日志给 ChatGPT 分析。
-
-注意：当前 Log Panel 的 Filter 一次只能选择一个分类。需要组合观察时，可以保持 `All` 并使用 Search 搜索 `viewDidLoad`、`saveReminder` 等关键词，或分别切换分类。
+1. 点击 `Learn -> Logs`。
+2. 用 Filter 分别观察 `Lifecycle`、`Delegate`、`Action`、`Closure`、`Snapshot`、`Cell`、`NavStack`。
+3. 打开 `Only Key Events` 只看关键事件。
+4. 用 `Pause Scroll / Resume Scroll` 控制自动滚动。
+5. 点击 `Copy` 复制当前可见日志。
 
 详细说明见 [docs/log-panel.md](docs/log-panel.md)。
 
-## 如何使用 Guide
+### Xcode Call Stack
 
-Guide 是带学模式。每张卡片都有：
-
-- 当前做什么
-- 应该看哪里
-- 操作前预测
-- 预期日志
-- 完成后理解问题
-- 一句话复盘
-- 胜利条件
-
-详细说明见 [docs/guided-learning.md](docs/guided-learning.md)。
-
-## 完整实验目录
-
-入口：`Learn -> Experiments`
-
-| 实验 | 观察重点 |
-|---|---|
-| Show / Push / Present | 展示方式、navigation stack、pop/dismiss |
-| Snapshot Full Apply / Reload / Reconfigure | diffable snapshot 如何刷新列表 |
-| Toggle Save | target-action 与 UIAction 的差异 |
-| Toggle Closure | weak/strong capture 与 deinit / Memory Graph |
-| Load 50 Reuse Items | cell init、updateConfiguration、prepareForReuse |
-| String Identity Experiment | 重复 String identifier 的风险 |
-| Manual UIViewController Version | 手动创建 collectionView 的对照实验 |
-
-## Xcode Call Stack 验证
-
-Logs 负责看顺序，Call Stack 负责看“是谁调用的”。
-
-建议断点：
+Logs 负责看顺序，Call Stack 负责看“是谁调用的”。建议断点：
 
 - `ReminderListViewController.viewDidLoad`
 - `ReminderListViewController.viewWillAppear`
@@ -109,21 +121,41 @@ Logs 负责看顺序，Call Stack 负责看“是谁调用的”。
 - `ReminderDetailViewController.viewDidLoad`
 - `ReminderDetailViewController.saveReminder`
 
-断点命中后，在 LLDB 输入：
+断点命中后在 LLDB 输入 `bt`，寻找 `UIKitCore`、`UIViewController`、`UICollectionViewController`、`UINavigationController` 与 `UIApplication sendAction`。完整步骤见 [docs/call-stack-teaching.md](docs/call-stack-teaching.md)。
 
-```lldb
-bt
+## 实验入口
+
+入口：`Learn -> Experiments`
+
+| 实验 | 观察重点 |
+|---|---|
+| Show / Push / Present | 展示方式、navigation stack、pop / dismiss |
+| Snapshot Full Apply / Reload / Reconfigure | diffable snapshot 如何刷新列表 |
+| Toggle Save | target-action 与 UIAction 的差异 |
+| Toggle Closure | weak / strong capture 与 `deinit` / Memory Graph |
+| Load 50 Reuse Items | cell init、updateConfiguration、prepareForReuse |
+| String Identity Experiment | 重复 String identifier 的风险 |
+| Manual UIViewController Version | 手动创建 collection view 的对照实验 |
+
+## 公开展示验证
+
+GitHub Pages 源文件位于 `docs/`，不改动核心 UIKit 演示代码。执行：
+
+```bash
+make verify-showcase
+git diff --check
 ```
 
-重点找：
+其中 `make verify-showcase` 会检查：
 
-- `UIKitCore`
-- `UIViewController`
-- `UICollectionViewController`
-- `UINavigationController`
-- `UIApplication sendAction`
+- Problem / Role / System / Evidence / Limitations 与 Jason / AI 边界。
+- canonical、Open Graph、Twitter Card、JSON-LD 和分享图片尺寸。
+- 站内链接、锚点、图片 alt 与尺寸属性。
+- 9 / 14 / 2 三项展示数字是否仍与 Swift 源码一致。
+- Jason DS v2、reduced-motion、焦点样式与隐私标记。
+- 所有第三方 GitHub Actions 是否固定到完整 40 位 commit SHA。
 
-详细步骤见 [docs/call-stack-teaching.md](docs/call-stack-teaching.md)。
+分享图需要重建时，可先安装 Pillow，再运行 `python3 scripts/generate-showcase-assets.py`。
 
 ## 项目结构
 
@@ -143,41 +175,21 @@ UIKitLifecycleDemo/
   StringIdentityExperimentViewController.swift
   ManualCollectionViewController.swift
 UIKitLifecycleDemoUITests/
-  UIKitLifecycleDemoUITests.swift
 docs/
+  index.html                 # 公开案例页
+  assets/                    # 页面样式、真实模拟器截图、Jason DS、分享图
+scripts/
+  audit-showcase.py
+  verify-actions-pinned.py
 Makefile
 CHANGELOG.md
 LICENSE
 ```
 
-入口链路：
-
-```text
-SceneDelegate
--> UIWindow
--> UINavigationController
--> ReminderListViewController
-```
-
-## 学习方法
-
-日常类比：UIKit 像舞台管理员。你写的 view controller 不是自己上台，而是等舞台管理员通知“该加载 view 了”“该出现了”“按钮被点了”“cell 被选中了”。
-
-技术定义：
-
-- 生命周期：UIKit 根据页面状态自动调用。
-- delegate：UIKit 把用户操作回调给你。
-- target-action：UIKit 根据控件事件调用 selector/action。
-- closure：业务代码自己设计的数据回传通道。
-
-Codex 学习流程见：
-
-- [docs/codex-learning-workflow.md](docs/codex-learning-workflow.md)
-- [docs/agent-flow.md](docs/agent-flow.md)
-- [docs/computer-use-sop.md](docs/computer-use-sop.md)
-
 ## 版本范围
 
 - `1.0.0`：基础 UIKit 生命周期、collection view、delegate、target-action、closure。
-- `1.1.0`：扩展可观测实验。
-- `1.2.0`：App 内 Logs、Guided Learning、慢速 Computer Use SOP。
+- `1.1.0`：扩展可观察实验。
+- `1.2.0`（Building）：App 内 Logs、Guided Learning 与 Computer Use SOP；尚未正式发布。
+
+项目代码使用 MIT License。课程式说明和运行结论以仓库当前源码及本地验证为准。

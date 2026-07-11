@@ -10,7 +10,7 @@ APP_PATH := $(DERIVED_DATA)/Build/Products/$(CONFIGURATION)-iphonesimulator/UIKi
 BUNDLE_ID := com.example.UIKitLifecycleDemo
 XCBEAUTIFY ?= xcbeautify
 
-.PHONY: build test-ui run open logs clean
+.PHONY: build test-ui run open logs clean verify-showcase
 
 build:
 	@mkdir -p "$(LOG_DIR)"
@@ -75,3 +75,7 @@ logs:
 clean:
 	@xcodebuild -project "$(PROJECT)" -scheme "$(SCHEME)" -derivedDataPath "$(DERIVED_DATA)" clean >/dev/null
 	@rm -rf "$(DERIVED_DATA)" "$(LOG_DIR)"
+
+verify-showcase:
+	@python3 scripts/audit-showcase.py
+	@python3 scripts/verify-actions-pinned.py
