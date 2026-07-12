@@ -106,6 +106,7 @@ def audit() -> list[str]:
         'data-mechanism="lifecycle"',
         'data-mechanism="target-action"',
         'data-mechanism="closure"',
+        'data-save-output aria-live="polite" aria-atomic="true"',
         "2 / 2 UI TEST PASS",
         "LAST VERIFIED · 2026-07-11",
         "9.456s edit/save · 27.483s Logs/Guide",
@@ -182,14 +183,26 @@ def audit() -> list[str]:
             errors.append(str(error))
 
     version = (DOCS / "assets" / "jx" / "VERSION").read_text(encoding="utf-8").strip()
-    if version != "2.1.0":
-        errors.append(f"Jason DS version is {version}, expected 2.1.0")
+    if version != "2.2.0":
+        errors.append(f"Jason DS version is {version}, expected 2.2.0")
 
     css = (DOCS / "assets" / "style.css").read_text(encoding="utf-8")
     if "prefers-reduced-motion: reduce" not in css:
         errors.append("style.css: missing reduced-motion support")
     if "@media (max-width: 420px)" not in css or ".runtime-card__body { grid-template-columns: 1fr; }" not in css:
         errors.append("style.css: missing 320px Save-trace layout contract")
+    for marker in (
+        "transition: transform 180ms var(--jx-ease-out)",
+        "@media (hover: hover) and (pointer: fine)",
+        ".theme-button:active",
+        ".runtime-run:active",
+    ):
+        if marker not in css:
+            errors.append(f"style.css: interaction contract missing: {marker}")
+    if "transition: all" in css:
+        errors.append("style.css: transition: all is not allowed")
+    if "*, *::before, *::after" in css:
+        errors.append("style.css: reduced motion must not globally erase semantic feedback")
     if "focus-visible" not in (DOCS / "assets" / "jx" / "base.css").read_text(encoding="utf-8"):
         errors.append("Jason DS base: missing focus-visible styles")
 
@@ -197,11 +210,32 @@ def audit() -> list[str]:
     for marker in (
         "activateSaveStep",
         "finishSaveTrace",
+        "cancelSaveTrace",
+        "scheduleSaveTimer",
         "prefers-reduced-motion: reduce",
-        'setAttribute("aria-busy", "true")',
+        "const runId = cancelSaveTrace();",
+        "if (runId !== saveRunId) return;",
+        'saveTrace.setAttribute("aria-busy", "true")',
+        'saveTrace?.removeAttribute("aria-busy")',
+        'runSave.textContent = "Restart Save trace"',
+        "saveTimers = saveTimers.filter",
+        "SAVE_TRACE_RESET_MS = 180",
     ):
         if marker not in app_js:
             errors.append(f"app.js: progressive Save trace marker missing: {marker}")
+    if "runSave.disabled" in app_js:
+        errors.append("app.js: Save trace trigger must remain interruptible")
+
+    start_trace = app_js.find("function startSaveTrace()")
+    cancel_trace = app_js.find("const runId = cancelSaveTrace();", start_trace)
+    immediate_status = app_js.find("saveOutput.textContent = wasRunning", start_trace)
+    reduced_branch = app_js.find("if (reducedMotion.matches)", start_trace)
+    schedule_trace = app_js.find("scheduleSaveTimer(", reduced_branch)
+    if not (
+        start_trace >= 0
+        and start_trace < cancel_trace < immediate_status < reduced_branch < schedule_trace
+    ):
+        errors.append("app.js: restart must cancel, announce, branch reduced motion, then schedule")
 
     hero_image = re.search(r'<img[^>]+src="assets/uikit-list.png"[^>]*>', html)
     if not hero_image:
