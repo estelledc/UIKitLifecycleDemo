@@ -58,13 +58,34 @@
 
   const saveLab = document.querySelector("[data-save-lab]");
   const runSave = saveLab?.querySelector("[data-run-save]");
+  const saveTrace = saveLab?.querySelector("[data-save-trace]");
   const saveOutput = saveLab?.querySelector("[data-save-output]");
   const saveSteps = Array.from(saveLab?.querySelectorAll("[data-mechanism]") || []);
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const SAVE_TRACE_RESET_MS = 180;
+  const SAVE_TRACE_STEP_MS = 480;
   let saveTimers = [];
+  let saveRunId = 0;
 
   function clearSaveTimers() {
     saveTimers.forEach((timer) => window.clearTimeout(timer));
     saveTimers = [];
+  }
+
+  function cancelSaveTrace() {
+    saveRunId += 1;
+    clearSaveTimers();
+    saveTrace?.removeAttribute("aria-busy");
+    return saveRunId;
+  }
+
+  function scheduleSaveTimer(runId, callback, delay) {
+    const timer = window.setTimeout(() => {
+      saveTimers = saveTimers.filter((pending) => pending !== timer);
+      if (runId !== saveRunId) return;
+      callback();
+    }, delay);
+    saveTimers.push(timer);
   }
 
   function resetSaveTrace() {
@@ -89,41 +110,54 @@
     }
   }
 
-  function finishSaveTrace() {
+  function finishSaveTrace(runId) {
+    if (runId !== saveRunId) return;
     saveSteps.forEach((step) => {
       step.classList.remove("is-active");
       step.classList.add("is-complete");
       step.removeAttribute("aria-current");
     });
-    saveLab?.removeAttribute("aria-busy");
-    if (runSave) {
-      runSave.disabled = false;
-      runSave.textContent = "Replay Save trace";
-    }
+    saveTrace?.removeAttribute("aria-busy");
+    if (runSave) runSave.textContent = "Replay Save trace";
     if (saveOutput) saveOutput.textContent = "Save 完成：closure 回传后，列表 snapshot 已刷新。";
   }
 
-  if (saveLab && runSave && saveSteps.length === 4) {
+  function startSaveTrace() {
+    const wasRunning = saveTrace?.getAttribute("aria-busy") === "true";
+    const runId = cancelSaveTrace();
+    resetSaveTrace();
+    runSave.textContent = "Restart Save trace";
+    saveTrace.setAttribute("aria-busy", "true");
+    if (saveOutput) {
+      saveOutput.textContent = wasRunning
+        ? "上一轮已取消。Save trace 已重新开始，准备进入 01 · delegate。"
+        : "Save trace 已开始，准备进入 01 · delegate。";
+    }
+
+    if (reducedMotion.matches) {
+      saveSteps.forEach((_, index) => activateSaveStep(index));
+      finishSaveTrace(runId);
+      return;
+    }
+
+    saveSteps.forEach((_, index) => {
+      scheduleSaveTimer(
+        runId,
+        () => activateSaveStep(index),
+        SAVE_TRACE_RESET_MS + index * SAVE_TRACE_STEP_MS,
+      );
+    });
+    scheduleSaveTimer(
+      runId,
+      () => finishSaveTrace(runId),
+      SAVE_TRACE_RESET_MS + saveSteps.length * SAVE_TRACE_STEP_MS,
+    );
+  }
+
+  if (saveLab && runSave && saveTrace && saveSteps.length === 4) {
     saveLab.classList.add("is-enhanced");
     runSave.hidden = false;
-    runSave.addEventListener("click", () => {
-      clearSaveTimers();
-      resetSaveTrace();
-      runSave.disabled = true;
-      runSave.textContent = "Running Save trace…";
-      saveLab.setAttribute("aria-busy", "true");
-
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        saveSteps.forEach((_, index) => activateSaveStep(index));
-        finishSaveTrace();
-        return;
-      }
-
-      saveSteps.forEach((_, index) => {
-        saveTimers.push(window.setTimeout(() => activateSaveStep(index), index * 480));
-      });
-      saveTimers.push(window.setTimeout(finishSaveTrace, saveSteps.length * 480));
-    });
+    runSave.addEventListener("click", startSaveTrace);
   }
 
   media.addEventListener("change", () => {
