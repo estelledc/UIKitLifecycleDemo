@@ -1,0 +1,51 @@
+.github/workflows/pages.yml
+  s_ed08457ca0efef::t_ee8365259f3f98 1-62
+Makefile
+  s_ed08457ca0efef::t_2155a9f0ccc267 13,78-81
+README.md
+  s_ed08457ca0efef::t_ec04d5b0a13beb 1,3-51,71,73,75,77-79,102,104,106-110,114,116,118-122,124,126,132,135,138,140,142,144-146,149,151-156,158,179-183,192-195
+docs/.nojekyll
+  s_ed08457ca0efef::t_933e83c1472dd0 1
+docs/assets/app.js
+  s_ed08457ca0efef::t_e5da01b0f8f40e 1-62
+docs/assets/jx/VERSION
+  s_ed08457ca0efef::t_41e55cf0bc2794 1
+docs/assets/jx/base.css
+  s_ed08457ca0efef::t_ce1a8f44ef5e4c 1-165
+docs/assets/jx/components.css
+  s_ed08457ca0efef::t_0b8e4961eb3867 1-590
+docs/assets/jx/tokens.css
+  s_ed08457ca0efef::t_40374ce9b96894 1-184
+docs/assets/style.css
+  s_ed08457ca0efef::t_025e0fd345958e 1-435
+docs/index.html
+  s_ed08457ca0efef::t_d8abfc7fe70261 1-255
+docs/robots.txt
+  s_ed08457ca0efef::t_a6d0c4f740c428 1-4
+docs/sitemap.xml
+  s_ed08457ca0efef::t_e5c37f473a9cf4 1-7
+scripts/audit-showcase.py
+  s_ed08457ca0efef::t_babff3eba32a5d 1-210
+scripts/generate-showcase-assets.py
+  s_ed08457ca0efef::t_102edab7cec854 1-104
+scripts/verify-actions-pinned.py
+  s_ed08457ca0efef::t_a77e13cef9fa10 1-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "0573182a89240a030b9ae0077da6d68074b8c054",
+  "prompts": {},
+  "sessions": {
+    "s_ed08457ca0efef": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "s_ed08457ca0efef",
+        "model": "unknown"
+      },
+      "human_author": "Jason <150260202+estelledc@users.noreply.github.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
