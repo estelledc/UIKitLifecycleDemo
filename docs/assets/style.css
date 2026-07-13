@@ -144,7 +144,9 @@ body {
 }
 
 .lab-screen img {
+  display: block;
   width: 100%;
+  height: auto;
   border-radius: var(--jx-radius-3);
   box-shadow: var(--jx-shadow-stack);
 }

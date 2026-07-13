@@ -190,6 +190,17 @@ def audit() -> list[str]:
             errors.append(f"style.css: shared design marker missing: {marker}")
     if "transition: all" in css or "transition: all" in components:
         errors.append("style.css: transition: all is not allowed")
+    screen_image_rule = re.search(r"\.lab-screen img\s*\{([^}]*)\}", css, flags=re.DOTALL)
+    if screen_image_rule is None or not re.search(r"\bheight\s*:\s*auto\s*;", screen_image_rule.group(1)):
+        errors.append("style.css: responsive screenshots must declare height: auto")
+    for name in ("uikit-list.png", "uikit-logs.png", "uikit-guide.png"):
+        tag = re.search(rf'<img\b[^>]*\bsrc="assets/{re.escape(name)}"[^>]*>', html)
+        if tag is None:
+            errors.append(f"index.html: missing screenshot tag: {name}")
+            continue
+        attributes = dict(re.findall(r'(\w+)="([^"]*)"', tag.group(0)))
+        if attributes.get("width") != "1206" or attributes.get("height") != "2622":
+            errors.append(f"index.html: screenshot intrinsic dimensions are missing or incorrect: {name}")
 
     for marker in ("runs-on: macos-15", "make build-ci", "make verify-showcase", "make public-scan"):
         if marker not in workflow:
