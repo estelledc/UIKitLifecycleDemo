@@ -3,103 +3,124 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UIKitLifecycleDemo · 可观察的 UIKit 生命周期实验室</title>
+  <meta name="theme-color" content="#f6f6f3">
+  <title>UIKitLifecycleDemo｜可观察的 UIKit 生命周期实验室</title>
   <meta name="description" content="面向 UIKit 初学者的公开学习实验室：9 个引导步骤、14 类结构化日志、真实 Call Stack 与 2 条 UI Test 流程。">
   <link rel="canonical" href="https://estelledc.github.io/UIKitLifecycleDemo/">
   <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="assets/jx/tokens.css">
+  <link rel="stylesheet" href="assets/jx/base.css">
+  <link rel="stylesheet" href="assets/jx/components.css">
   <link rel="stylesheet" href="assets/style.css">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="UIKitLifecycleDemo">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="Jason Xun">
+  <meta property="og:title" content="UIKitLifecycleDemo｜生命周期实验室">
   <meta property="og:description" content="先预测一次 UIKit 回调，再追到是谁触发它。">
   <meta property="og:url" content="https://estelledc.github.io/UIKitLifecycleDemo/">
   <meta property="og:image" content="https://estelledc.github.io/UIKitLifecycleDemo/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="UIKit 生命周期循环、页面层级与调用节点组成的实验室图标">
+  <meta property="og:image:alt" content="UIKit 生命周期、调用机制与验证证据概览">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="UIKitLifecycleDemo｜生命周期实验室">
+  <meta name="twitter:description" content="9 个引导步骤、14 类日志与 2 条 UI Test 流程。">
   <meta name="twitter:image" content="https://estelledc.github.io/UIKitLifecycleDemo/assets/og-image.png">
 </head>
 <body data-guided-steps="9" data-log-categories="14" data-ui-tests="2">
-  <header class="hero shell">
-    <nav aria-label="主导航">
-      <a class="brand" href="#top"><img src="assets/favicon.png" alt="UIKitLifecycleDemo 图标">UIKitLifecycleDemo</a>
-      <div><a href="#learn">学习系统</a><a href="#evidence">验证证据</a><a href="https://github.com/estelledc/UIKitLifecycleDemo">GitHub</a></div>
-    </nav>
-    <div class="hero-grid" id="top">
-      <div>
-        <p class="eyebrow">OPEN SOURCE · PURE UIKIT · 1.2.0 BUILDING</p>
-        <h1>先预测一次回调，<br>再追到是谁触发它。</h1>
-        <p class="lead">一台给 UIKit 初学者的生命周期显微镜：在 Guide 里预测，在真实界面里操作，再用结构化 Logs、Call Stack 和 UI Test 区分框架回调与业务数据流。</p>
-        <div class="actions"><a class="primary" href="https://github.com/estelledc/UIKitLifecycleDemo">查看源码</a><a class="secondary" href="#run">5 分钟运行</a></div>
-      </div>
-      <img class="app-icon" src="assets/app-icon.png" alt="由生命周期循环、页面层级和调用节点组成的项目图标">
+  <a class="jx-skip-link" href="#main">跳到主要内容</a>
+  <header class="jx-site-header" aria-label="站点导航">
+    <div class="jx-site-header__inner">
+      <a class="jx-site-header__identity" href="#top" aria-label="UIKitLifecycleDemo 首页">
+        <strong>UIKitLifecycleDemo</strong><span>Observable UIKit learning lab</span>
+      </a>
+      <nav class="jx-site-nav" aria-label="主导航">
+        <div class="jx-site-nav__links"><a href="#system">System</a><a href="#evidence">Evidence</a><a href="#run">Run</a><a href="https://github.com/estelledc/UIKitLifecycleDemo" target="_blank" rel="noopener">GitHub ↗</a></div>
+        <details class="jx-site-nav__menu"><summary>Menu</summary><nav aria-label="移动导航"><a href="#system">System</a><a href="#evidence">Evidence</a><a href="#run">Run</a><a href="https://github.com/estelledc/UIKitLifecycleDemo" target="_blank" rel="noopener">GitHub ↗</a></nav></details>
+      </nav>
     </div>
-    <dl class="metrics" aria-label="已验证的项目规模">
-      <div><dt>9</dt><dd>个引导步骤</dd></div>
-      <div><dt>14</dt><dd>类结构化日志</dd></div>
-      <div><dt>2</dt><dd>条 UI Test 流程</dd></div>
-      <div><dt>4</dt><dd>种调用机制</dd></div>
-    </dl>
   </header>
 
-  <main>
-    <section class="shell" id="learn">
-      <p class="eyebrow">ONE FLOW, MULTIPLE SOURCES OF EVIDENCE</p>
-      <h2>从可见操作还原 UIKit 调用链</h2>
-      <div class="two-col">
-        <article class="panel"><span class="number">01</span><h3>Guided Learning</h3><p>每一步固定给出当前操作、观察位置、预测问题、预期日志、理解题和胜利条件。Guide 负责引导，不替学习者自动宣称掌握。</p></article>
-        <article class="panel"><span class="number">02</span><h3>Observable Runtime</h3><p>同一事件同时进入 App 内 Logs 与 Xcode Console；断点和 Call Stack 回答“谁触发”，UI Test 验证关键用户流程可以复现。</p></article>
-      </div>
-    </section>
+  <main id="main">
+    <article>
+      <header class="lab-hero jx-container" id="top">
+        <div>
+          <div class="lab-kicker"><span class="jx-chip" data-state="building">Building · v1.2.0</span><span class="jx-eyebrow"><span class="jx-eyebrow__rule"></span>Public UIKit learning system</span></div>
+          <h1>先预测一次回调，<br>再追到是谁触发它。</h1>
+          <p class="lab-lede">一台给 UIKit 初学者的生命周期显微镜：在 Guide 里预测，在真实界面里操作，再用结构化 Logs、Call Stack 和 UI Test 区分框架回调与业务数据流。</p>
+          <p class="lab-summary-en" lang="en">A public UIKit learning lab that makes lifecycle callbacks, delegate routing, target-action, closures, diffable snapshots, and call stacks observable.</p>
+          <div class="lab-actions"><a class="jx-action" href="https://github.com/estelledc/UIKitLifecycleDemo" target="_blank" rel="noopener">查看源码 ↗</a><a class="jx-action jx-action--secondary" href="#run">5 分钟运行</a></div>
+        </div>
+        <aside class="lab-facts" aria-label="项目事实">
+          <img class="lab-mark" src="assets/app-icon.png" width="1024" height="1024" alt="由生命周期循环、页面层级和调用节点组成的项目图标">
+          <dl><div><dt>Role</dt><dd>作者 · UIKit 教学与可观察性设计</dd></div><div><dt>Core loop</dt><dd>预测 → 操作 → 观察 → 解释 → 验证</dd></div><div><dt>Platform</dt><dd>iOS 17+ · Pure UIKit · No network</dd></div><div><dt>Boundary</dt><dd>教学 Demo · 不是生产级提醒事项 App</dd></div></dl>
+        </aside>
+      </header>
 
-    <section class="screens shell" aria-labelledby="screens-title">
-      <p class="eyebrow">REAL SIMULATOR OUTPUT</p>
-      <h2 id="screens-title">不是网页概念稿，是可运行界面</h2>
-      <div class="screen-grid">
-        <figure><img src="assets/uikit-list.png" width="1206" height="2622" alt="Reminders 列表真实模拟器截图" loading="lazy" decoding="async"><figcaption>List：从 cell 点击进入 delegate、生命周期与 Save 链路</figcaption></figure>
-        <figure><img src="assets/uikit-logs.png" width="1206" height="2622" alt="结构化 UIKit Logs 面板真实模拟器截图" loading="lazy" decoding="async"><figcaption>Logs：筛选 owner、method、category 与关键事件</figcaption></figure>
-        <figure><img src="assets/uikit-guide.png" width="1206" height="2622" alt="五分钟 UIKit Guide 真实模拟器截图" loading="lazy" decoding="async"><figcaption>Guide：预测、操作、观察、解释与验证</figcaption></figure>
-      </div>
-    </section>
+      <aside class="jx-case-question jx-container" aria-label="本项目回答的问题">
+        <p class="jx-case-question__label">This lab answers</p>
+        <div><strong class="jx-case-question__prompt">怎样把 UIKit 隐式调用变成初学者可以预测、复现、打断点和解释的完整学习闭环？</strong><p class="jx-case-question__context">同一事件进入 App 内 Logs 与 Xcode Console；断点和 Call Stack 回答“谁触发”，UI Test 验证关键用户流程可以重复。</p></div>
+      </aside>
 
-    <section class="category-section shell">
-      <div class="section-heading"><div><p class="eyebrow">LOG CATEGORY EXPLORER</p><h2>搜索 14 类观察信号</h2></div><label>筛选日志类别<input id="category-filter" type="search" autocomplete="off" placeholder="例如 Lifecycle、Delegate、Memory"></label></div>
-      <p id="category-count" class="muted" aria-live="polite">14 / 14 categories</p>
-      <div id="category-list" class="category-list"></div>
-    </section>
+      <ul class="jx-proof-rail jx-container" aria-label="已验证的项目规模">
+        <li><span class="jx-proof-rail__label">Guided learning</span><strong class="jx-proof-rail__value">9</strong><span class="jx-proof-rail__detail">个引导步骤</span><span class="jx-source-tag" data-source="build">source count</span></li>
+        <li><span class="jx-proof-rail__label">Observability</span><strong class="jx-proof-rail__value">14</strong><span class="jx-proof-rail__detail">类结构化日志</span><span class="jx-source-tag" data-source="build">source count</span></li>
+        <li><span class="jx-proof-rail__label">UI test</span><strong class="jx-proof-rail__value">2 / 2</strong><span class="jx-proof-rail__detail">核心用户流程</span><span class="jx-source-tag" data-source="measured">simulator</span></li>
+        <li><span class="jx-proof-rail__label">Mechanisms</span><strong class="jx-proof-rail__value">4</strong><span class="jx-proof-rail__detail">种调用机制</span><span class="jx-source-tag" data-source="measured">trace</span></li>
+      </ul>
 
-    <section class="trace shell">
-      <p class="eyebrow">ONE SAVE, FOUR MECHANISMS</p>
-      <h2>一次保存穿过四种调用机制</h2>
-      <div class="pipeline" aria-label="保存调用链"><span>didSelectItemAt</span><b>→</b><span>viewDidLoad</span><b>→</b><span>saveReminder</span><b>→</b><span>onSave</span><b>→</b><span>snapshot</span></div>
-      <p>Delegate 报告用户选择，UIKit 生命周期准备页面，target-action 触发保存，业务 closure 回传结果，diffable snapshot 刷新列表。它们出现在同一流程里，但 owner 和触发方不同。</p>
-    </section>
+      <section class="lab-section jx-container" id="system">
+        <div class="lab-section__heading"><div><p class="jx-eyebrow"><span class="jx-eyebrow__rule"></span>System</p><h2>从可见操作，还原 UIKit 调用链。</h2></div><p>Guide 负责建立预测，运行时日志保存证据；两者共同服务于理解，不替学习者自动宣称掌握。</p></div>
+        <div class="lab-card-grid">
+          <article class="lab-card"><span class="lab-index">01 / Guided learning</span><h3>一次只观察一个核心问题</h3><p>每一步给出当前操作、观察位置、预测问题、预期日志、理解题和胜利条件。先作答，再进入真实界面验证。</p></article>
+          <article class="lab-card"><span class="lab-index">02 / Observable runtime</span><h3>日志要能回到 owner 与触发方</h3><p>同一事件进入 App 内 Logs 与 Xcode Console；断点和 Call Stack 区分 UIKit 框架回调、delegate、target-action 与业务 closure。</p></article>
+        </div>
+      </section>
 
-    <section class="evidence shell" id="evidence">
-      <p class="eyebrow">EVIDENCE, NOT CLAIMS</p>
-      <h2>页面与 App 共用发布门禁</h2>
-      <div class="check-grid"><p><strong>App</strong><br>PR 与 main 都执行 generic iOS Simulator 构建，防止展示页和真实项目脱节。</p><p><strong>UI</strong><br>编辑并保存、打开 Logs 与 Guide 两条流程在真实 iPhone Simulator 上验证。</p><p><strong>Source</strong><br>9 个 GuidedStep、14 个日志类别和 2 条 UI Test 都从当前 Swift 源码核对。</p><p><strong>Public</strong><br>本地路径、凭证特征、内部标识、页面资源和 Action SHA 固定均自动审计。</p></div>
-    </section>
+      <section class="lab-section jx-container" aria-labelledby="screens-title">
+        <div class="lab-section__heading"><div><p class="jx-eyebrow"><span class="jx-eyebrow__rule"></span>Real simulator output</p><h2 id="screens-title">不是网页概念稿，是可运行界面。</h2></div><p>三张真实 Simulator 截图分别承担操作、观察与学习引导，不使用商业客户端素材。</p></div>
+        <div class="lab-screen-grid">
+          <figure><div class="lab-screen"><img src="assets/uikit-list.png" width="1206" height="2622" alt="Reminders 列表真实模拟器截图" loading="lazy" decoding="async"></div><figcaption><strong>List</strong><span>从 cell 点击进入 delegate、生命周期与 Save 链路</span></figcaption></figure>
+          <figure><div class="lab-screen"><img src="assets/uikit-logs.png" width="1206" height="2622" alt="结构化 UIKit Logs 面板真实模拟器截图" loading="lazy" decoding="async"></div><figcaption><strong>Logs</strong><span>筛选 owner、method、category 与关键事件</span></figcaption></figure>
+          <figure><div class="lab-screen"><img src="assets/uikit-guide.png" width="1206" height="2622" alt="五分钟 UIKit Guide 真实模拟器截图" loading="lazy" decoding="async"></div><figcaption><strong>Guide</strong><span>预测、操作、观察、解释与验证</span></figcaption></figure>
+        </div>
+      </section>
 
-    <section class="run shell" id="run">
-      <div><p class="eyebrow">RUN LOCALLY</p><h2>5 分钟开始第一次预测</h2><p>需要 macOS、Xcode 和 iOS 17+ Simulator。项目使用纯 UIKit、纯代码页面，不依赖网络或第三方业务库。</p></div>
-      <pre><code>git clone https://github.com/estelledc/UIKitLifecycleDemo.git
+      <section class="lab-section jx-container" aria-labelledby="category-title">
+        <div class="lab-section__heading lab-section__heading--control"><div><p class="jx-eyebrow"><span class="jx-eyebrow__rule"></span>Log category explorer</p><h2 id="category-title">搜索 14 类观察信号。</h2></div><label class="lab-filter">筛选日志类别<input id="category-filter" type="search" autocomplete="off" placeholder="例如 Lifecycle、Delegate、Memory"></label></div>
+        <p id="category-count" class="lab-count" aria-live="polite">14 / 14 categories</p>
+        <div id="category-list" class="lab-token-list"></div>
+      </section>
+
+      <section class="lab-section jx-container">
+        <div class="lab-section__heading"><div><p class="jx-eyebrow"><span class="jx-eyebrow__rule"></span>One save, four mechanisms</p><h2>一次保存，穿过四种调用机制。</h2></div><p>它们出现在同一流程里，但 owner、触发方和适用场景不同。</p></div>
+        <ol class="lab-pipeline" aria-label="保存调用链"><li>didSelectItemAt</li><li>viewDidLoad</li><li>saveReminder</li><li>onSave</li><li>snapshot</li></ol>
+        <p class="lab-note">Delegate 报告用户选择，UIKit 生命周期准备页面，target-action 触发保存，业务 closure 回传结果，diffable snapshot 刷新列表。</p>
+      </section>
+
+      <section class="lab-section jx-container" id="evidence">
+        <div class="lab-section__heading"><div><p class="jx-eyebrow"><span class="jx-eyebrow__rule"></span>Evidence, not claims</p><h2>页面与 App 共用发布门禁。</h2></div><p>展示页上的数量从当前 Swift 源码核对，并与构建、UI 流程和公开信息扫描一起验证。</p></div>
+        <ul class="lab-evidence-list"><li><div><strong>App</strong><p>PR 与 main 都执行 generic iOS Simulator 构建，防止展示页和真实项目脱节。</p></div><span class="jx-source-tag" data-source="build">xcodebuild</span></li><li><div><strong>UI</strong><p>编辑并保存、打开 Logs 与 Guide 两条流程在真实 iPhone Simulator 上验证。</p></div><span class="jx-source-tag" data-source="measured">2 / 2</span></li><li><div><strong>Source</strong><p>9 个 GuidedStep、14 个日志类别和 2 条 UI Test 都从当前 Swift 源码核对。</p></div><span class="jx-source-tag" data-source="build">audit</span></li><li><div><strong>Public</strong><p>本地路径、凭证特征、内部标识、页面资源和 Action SHA 固定均自动审计。</p></div><span class="jx-source-tag" data-source="build">scan</span></li></ul>
+        <p class="jx-verification-line">Evidence reviewed from public source and iPhone Simulator tests.</p>
+      </section>
+
+      <section class="lab-section jx-container" id="run">
+        <div class="lab-run"><div><p class="jx-eyebrow"><span class="jx-eyebrow__rule"></span>Run locally</p><h2>5 分钟开始第一次预测。</h2><p>需要 macOS、Xcode 和 iOS 17+ Simulator。项目使用纯 UIKit、纯代码页面，不依赖网络或第三方业务库。</p></div><pre><code>git clone https://github.com/estelledc/UIKitLifecycleDemo.git
 cd UIKitLifecycleDemo
 make build
 make run
 
 # 验证两条核心 UI 流程
-make test-ui</code></pre>
-    </section>
+make test-ui</code></pre></div>
+      </section>
 
-    <section class="limits shell">
-      <p class="eyebrow">PUBLIC BOUNDARY</p>
-      <h2>刻意不做什么</h2>
-      <p>它不是生产级提醒事项 App，不包含网络、持久化、EventKit 或真实业务状态。Guide 描述预期观察但不伪造日志；两条 UI Test 不代表完整回归；仅仅阅读或运行 Demo 也不等于已经掌握 UIKit。</p>
-    </section>
+      <section class="lab-section jx-container">
+        <div class="lab-section__heading"><div><p class="jx-eyebrow"><span class="jx-eyebrow__rule"></span>Public boundary</p><h2>刻意不做什么。</h2></div><p class="lab-limit">它不是生产级提醒事项 App，不包含网络、持久化、EventKit 或真实业务状态。Guide 描述预期观察但不伪造日志；两条 UI Test 不代表完整回归；仅仅阅读或运行 Demo 也不等于已经掌握 UIKit。</p></div>
+      </section>
+    </article>
   </main>
 
-  <footer class="shell"><p>MIT licensed · Built as a public UIKit learning lab.</p><a href="https://github.com/estelledc/UIKitLifecycleDemo/blob/main/docs/guided-learning.md">阅读 Guided Learning</a></footer>
+  <footer class="jx-footer"><div class="jx-footer__colophon"><strong>UIKitLifecycleDemo</strong>Public observable UIKit learning lab.</div><nav class="jx-footer__index" aria-label="页脚导航"><a href="https://estelledc.github.io/">← Jason Xun</a><a href="https://estelledc.github.io/work/">Work</a><a href="https://github.com/estelledc/UIKitLifecycleDemo">GitHub ↗</a><a href="https://github.com/estelledc/UIKitLifecycleDemo/blob/main/docs/guided-learning.md">Guided Learning ↗</a></nav><div class="jx-footer__stamp">Jason DS 2.2.0<br>Reviewed 2026.07</div></footer>
   <script src="assets/app.js"></script>
 </body>
 </html>

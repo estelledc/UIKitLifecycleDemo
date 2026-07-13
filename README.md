@@ -155,12 +155,12 @@ git diff --check
 - canonical、Open Graph、Twitter Card、JSON-LD 和分享图片尺寸。
 - 站内链接、锚点、图片 alt 与尺寸属性。
 - 9 / 14 / 2 三项展示数字是否仍与 Swift 源码一致。
-- 与 SwiftMessengerLab 一致的深蓝、青色、珊瑚色设计令牌、响应式布局与焦点样式。
+- 与 Jason Xun 主站一致的 Jason DS 2.2.0 vendor copy、纸白/墨黑双主题、响应式导航、证据来源标签和返回主站入口。
 - 所有第三方 GitHub Actions 是否固定到完整 40 位 commit SHA。
 - List、Logs、Guide 三张 Simulator 截图及其尺寸。
 - PR 与 `main` 均执行 generic iOS Simulator 构建和网页审计；只有 `main` 两类检查通过后才部署 Pages。
 
-分享图需要重建时，可先安装 Pillow，再运行 `python3 scripts/generate-showcase-assets.py`。
+App 图标变更后，可先安装 Pillow，再运行 `python3 scripts/generate-showcase-assets.py` 重建 favicon 并校验已跟踪的分享图尺寸。
 
 ## 项目结构
 

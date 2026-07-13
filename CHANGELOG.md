@@ -19,7 +19,7 @@
 - README 改成课程入口，优先引导 App 内 Logs 和 Guided Tour。
 - 日志重新保持 `🧭 [Owner] method - message` 前缀，方便 Console 过滤。
 - Pages 工作流同时验证 generic iOS Simulator 构建、公开边界与完整 SHA Action 固定。
-- GitHub Pages 改用与 SwiftMessengerLab 一致的页面结构、设计令牌、截图卡片与社交预览风格。
+- GitHub Pages 接入与个人主站一致的 Jason DS 2.2.0 vendor copy、证据标签、返回主站入口与编辑式社交预览。
 
 ## 1.1.0 - 2026-07-09
 

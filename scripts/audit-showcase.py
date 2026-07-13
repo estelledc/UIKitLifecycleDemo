@@ -72,6 +72,10 @@ def audit() -> list[str]:
         NOT_FOUND,
         DOCS / "assets" / "style.css",
         DOCS / "assets" / "app.js",
+        DOCS / "assets" / "jx" / "VERSION",
+        DOCS / "assets" / "jx" / "tokens.css",
+        DOCS / "assets" / "jx" / "base.css",
+        DOCS / "assets" / "jx" / "components.css",
         DOCS / "assets" / "app-icon.png",
         DOCS / "assets" / "favicon.png",
         DOCS / "assets" / "og-image.png",
@@ -90,6 +94,8 @@ def audit() -> list[str]:
     not_found = NOT_FOUND.read_text(encoding="utf-8")
     css = (DOCS / "assets" / "style.css").read_text(encoding="utf-8")
     javascript = (DOCS / "assets" / "app.js").read_text(encoding="utf-8")
+    tokens = (DOCS / "assets" / "jx" / "tokens.css").read_text(encoding="utf-8")
+    components = (DOCS / "assets" / "jx" / "components.css").read_text(encoding="utf-8")
     workflow = WORKFLOW.read_text(encoding="utf-8")
     parser = PageParser()
     parser.feed(html)
@@ -100,14 +106,22 @@ def audit() -> list[str]:
         'data-ui-tests="2"',
         f'<link rel="canonical" href="{CANONICAL}">',
         "先预测一次回调",
-        "REAL SIMULATOR OUTPUT",
-        "EVIDENCE, NOT CLAIMS",
+        "Real simulator output",
+        "Evidence, not claims",
         "不等于已经掌握 UIKit",
         "assets/uikit-list.png",
         "assets/uikit-logs.png",
         "assets/uikit-guide.png",
         "assets/app-icon.png",
         "assets/og-image.png",
+        '<meta name="theme-color" content="#f6f6f3">',
+        "assets/jx/tokens.css",
+        "assets/jx/base.css",
+        "assets/jx/components.css",
+        "This lab answers",
+        "jx-proof-rail",
+        "jx-footer",
+        'https://estelledc.github.io/">← Jason Xun',
     ]
     for marker in required_markers:
         if marker not in html:
@@ -150,22 +164,25 @@ def audit() -> list[str]:
         except ValueError as error:
             errors.append(str(error))
 
+    if (DOCS / "assets" / "jx" / "VERSION").read_text(encoding="utf-8").strip() != "2.2.0":
+        errors.append("Jason DS vendor version must be 2.2.0")
+    if "Jason DS · Tokens v2.2.0" not in tokens or ".jx-site-header" not in components:
+        errors.append("Jason DS vendor bundle is incomplete")
+
     visual_contract = [
-        "--bg: #061534",
-        "--cyan: #27c9ff",
-        "--coral: #ff8b73",
-        "--max: 1120px",
-        ".hero-grid",
-        ".metrics",
-        ".screen-grid",
-        ".app-icon",
-        "@media (max-width: 780px)",
+        "var(--jx-ink)",
+        "var(--jx-surface)",
+        "var(--jx-font-mono)",
+        ".lab-hero",
+        ".lab-screen-grid",
+        ".lab-pipeline",
+        "@media (max-width: 760px)",
         "prefers-reduced-motion: reduce",
     ]
     for marker in visual_contract:
         if marker not in css:
             errors.append(f"style.css: shared design marker missing: {marker}")
-    if "transition: all" in css:
+    if "transition: all" in css or "transition: all" in components:
         errors.append("style.css: transition: all is not allowed")
 
     for marker in ("runs-on: macos-15", "make build-ci", "make verify-showcase", "make public-scan"):
@@ -180,9 +197,10 @@ def audit() -> list[str]:
         "/" + "us" + "ers/",
         "byte" + "dance",
         "la" + "rk",
-        "jason ds",
-        "assets/jx/",
         "og-uikit.png",
+        "#061534",
+        "#27c9ff",
+        "#ff8b73",
     ]
     for marker in forbidden:
         if marker in published_text:
@@ -205,7 +223,7 @@ def main() -> int:
         return 1
     facts = source_facts()
     print(
-        "OK: shared design, links, assets, release gates, and source evidence verified "
+        "OK: Jason DS 2.2.0, links, assets, release gates, and source evidence verified "
         f"({facts['guided']} guided steps, {facts['categories']} log categories, {facts['tests']} UI tests)"
     )
     return 0
