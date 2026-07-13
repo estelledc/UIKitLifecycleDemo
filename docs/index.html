@@ -54,7 +54,7 @@
         "runtimePlatform": "iOS Simulator",
         "author": {"@id": "https://estelledc.github.io/#person"},
         "inLanguage": ["zh-Hans", "en"],
-        "dateModified": "2026-07-11",
+        "dateModified": "2026-07-13",
         "isAccessibleForFree": true
       }
     ]
@@ -135,8 +135,8 @@
         </div>
         <a class="runtime-test" href="https://github.com/estelledc/UIKitLifecycleDemo/blob/main/UIKitLifecycleDemoUITests/UIKitLifecycleDemoUITests.swift">
           <strong>2 / 2 UI TEST PASS</strong>
-          <span>2026-07-11 · local iPhone 17 Pro Simulator</span>
-          <small>9.456s edit/save · 27.483s Logs/Guide · source ↗</small>
+          <span>2026-07-13 · local iPhone 17 Pro Simulator</span>
+          <small>编辑保存与 Logs / Guide 两条核心流程 · source ↗</small>
         </a>
       </div>
     </section>
@@ -187,13 +187,27 @@
     <section class="jx-container jx-case-section observation-section" aria-labelledby="observation-title">
       <div class="jx-case-section__grid">
         <h2 class="jx-case-section__heading" id="observation-title">Interface / 观察面</h2>
-        <div class="jx-case-section__body observation-grid">
-          <figure class="device-shot">
-            <div class="device-shot__screen">
-              <img src="assets/uikit-list.png" width="1206" height="2622" alt="iPhone 17 Pro 模拟器中的 UIKitLifecycleDemo 提醒列表首页" loading="lazy" decoding="async">
-            </div>
-            <figcaption>真实 Simulator 构建截图，不是网页 mockup。业务外壳保持简单，把注意力留给 Learn、Logs 与调用链。</figcaption>
-          </figure>
+        <div class="jx-case-section__body observation-stack">
+          <div class="simulator-gallery" aria-label="UIKitLifecycleDemo 三个真实 Simulator 页面">
+            <figure class="device-shot">
+              <div class="device-shot__screen">
+                <img src="assets/uikit-list.png" width="1206" height="2622" alt="iPhone 17 Pro 模拟器中的 UIKitLifecycleDemo 提醒列表首页" loading="lazy" decoding="async">
+              </div>
+              <figcaption>List：从真实 cell 点击进入生命周期、delegate 与 Save 链路。</figcaption>
+            </figure>
+            <figure class="device-shot">
+              <div class="device-shot__screen">
+                <img src="assets/uikit-logs.png" width="1206" height="2622" alt="iPhone 17 Pro 模拟器中的结构化 UIKit 日志面板" loading="lazy" decoding="async">
+              </div>
+              <figcaption>Logs：按 owner、method、category 和关键事件筛选框架回调证据。</figcaption>
+            </figure>
+            <figure class="device-shot">
+              <div class="device-shot__screen">
+                <img src="assets/uikit-guide.png" width="1206" height="2622" alt="iPhone 17 Pro 模拟器中的五分钟 UIKit 引导实验" loading="lazy" decoding="async">
+              </div>
+              <figcaption>Guide：先预测，再操作、观察、解释与验证，不把打开页面等同于掌握。</figcaption>
+            </figure>
+          </div>
           <div class="mechanism-map">
             <p class="mechanism-map__label">ONE FLOW · FOUR MECHANISMS</p>
             <ol>
@@ -213,9 +227,9 @@
         <div class="jx-case-section__body">
           <p>展示页只陈述能够从当前仓库或本地构建直接复核的事实。</p>
           <div class="test-proof" aria-label="最近 UI Test 验证记录">
-            <span>LAST VERIFIED · 2026-07-11</span>
+            <span>LAST VERIFIED · 2026-07-13</span>
             <strong>2 / 2 UI Test passed</strong>
-            <p>本地 iPhone 17 Pro Simulator：<code>testEditFirstReminderTitle</code> 9.456s；<code>testOpenLogsAndGuide</code> 27.483s。来源是当前 XCTest 文件与本次本地运行，不代表完整回归覆盖。</p>
+            <p>本地 iPhone 17 Pro Simulator：<code>testEditFirstReminderTitle</code> 与 <code>testOpenLogsAndGuide</code> 均通过。来源是当前 XCTest 文件与本次本地运行，不代表完整回归覆盖。</p>
           </div>
           <ul class="jx-evidence-list evidence-list">
             <li><a href="https://github.com/estelledc/UIKitLifecycleDemo/blob/main/UIKitLifecycleDemo/GuidedExperiment.swift"><span><strong>9 个 GuidedStep</strong><small>包括四步核心路线与五个高级观察步骤</small></span></a></li>
@@ -268,7 +282,7 @@ make test-ui</code></pre>
       <a href="https://estelledc.github.io/resume/">resume</a>
       <a href="https://github.com/estelledc/UIKitLifecycleDemo">github</a>
     </nav>
-    <time class="jx-footer__stamp" datetime="2026-07-11" lang="en">Updated 2026·07·11</time>
+    <time class="jx-footer__stamp" datetime="2026-07-13" lang="en">Updated 2026·07·13</time>
   </footer>
 
   <script src="assets/app.js" defer></script>

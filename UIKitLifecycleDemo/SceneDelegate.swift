@@ -14,7 +14,17 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // App 的第一个页面：导航控制器包住列表页，方便观察 push / pop 生命周期。
         let listViewController = ReminderListViewController()
-        let navigationController = UINavigationController(rootViewController: listViewController)
+        let navigationController: UINavigationController
+        let arguments = ProcessInfo.processInfo.arguments
+        if arguments.contains("--showcase-guide") {
+            _ = listViewController.view
+            navigationController = UINavigationController(rootViewController: GuidedExperimentViewController())
+        } else if arguments.contains("--showcase-logs") {
+            _ = listViewController.view
+            navigationController = UINavigationController(rootViewController: DemoLogPanelViewController())
+        } else {
+            navigationController = UINavigationController(rootViewController: listViewController)
+        }
 
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = navigationController

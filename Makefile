@@ -10,7 +10,7 @@ APP_PATH := $(DERIVED_DATA)/Build/Products/$(CONFIGURATION)-iphonesimulator/UIKi
 BUNDLE_ID := com.example.UIKitLifecycleDemo
 XCBEAUTIFY ?= xcbeautify
 
-.PHONY: build test-ui run open logs clean verify-showcase
+.PHONY: build build-ci test-ui run open logs clean verify-showcase public-scan check
 
 build:
 	@mkdir -p "$(LOG_DIR)"
@@ -33,6 +33,16 @@ build:
 			-derivedDataPath "$(DERIVED_DATA)" \
 			build 2>&1 | tee "$(BUILD_LOG)"; \
 	fi
+
+build-ci:
+	@xcodebuild \
+		-project "$(PROJECT)" \
+		-scheme "$(SCHEME)" \
+		-sdk iphonesimulator \
+		-destination 'generic/platform=iOS Simulator' \
+		-derivedDataPath "$(DERIVED_DATA)" \
+		CODE_SIGNING_ALLOWED=NO \
+		build
 
 run: build
 	@xcrun simctl boot "$(SIMULATOR_NAME)" >/dev/null 2>&1 || true
@@ -79,3 +89,8 @@ clean:
 verify-showcase:
 	@python3 scripts/audit-showcase.py
 	@python3 scripts/verify-actions-pinned.py
+
+public-scan:
+	@./scripts/public-scan.sh
+
+check: build-ci verify-showcase public-scan

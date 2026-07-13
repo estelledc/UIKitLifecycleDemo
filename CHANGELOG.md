@@ -11,12 +11,14 @@
 - `GuidedExperimentViewController`：提供 5 分钟核心导览和高级实验导览。
 - Detail 页 `Use Example Title` 按钮，减少第一轮教学中的键盘和 haptic 噪声。
 - `docs/log-panel.md`、`docs/guided-learning.md`、`docs/call-stack-teaching.md`、`docs/computer-use-sop.md`、`docs/uikit-lifecycle-demo-1.2.0-roadmap.md`。
+- GitHub Pages 公开案例页，展示 List、Logs、Guide 三张真实 Simulator 截图和可验证证据。
 
 ### Changed
 
 - 导航栏实验入口改为 `Learn` 菜单，集中放置 Guide、Logs 和 Experiments。
 - README 改成课程入口，优先引导 App 内 Logs 和 Guided Tour。
 - 日志重新保持 `🧭 [Owner] method - message` 前缀，方便 Console 过滤。
+- Pages 工作流同时验证 generic iOS Simulator 构建、公开边界与完整 SHA Action 固定。
 
 ## 1.1.0 - 2026-07-09
 
