@@ -129,6 +129,12 @@ def audit() -> list[str]:
 
     if parser.h1_count != 1:
         errors.append(f"index.html: expected exactly one h1, found {parser.h1_count}")
+    for raw_classes in re.findall(r'class="([^"]+)"', html):
+        classes = set(raw_classes.split())
+        if {"jx-container", "jx-proof-rail"} <= classes:
+            errors.append("index.html: jx-proof-rail must be nested inside jx-container, not composed with it")
+    if not re.search(r'<div class="jx-container">\s*<ul class="jx-proof-rail"', html):
+        errors.append("index.html: proof rail is missing its shared layout container")
     for image in parser.images:
         if not image.get("alt", "").strip():
             errors.append(f"index.html: image missing alt: {image.get('src', '<unknown>')}")

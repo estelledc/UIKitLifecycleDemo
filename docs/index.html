@@ -62,12 +62,14 @@
         <div><strong class="jx-case-question__prompt">怎样把 UIKit 隐式调用变成初学者可以预测、复现、打断点和解释的完整学习闭环？</strong><p class="jx-case-question__context">同一事件进入 App 内 Logs 与 Xcode Console；断点和 Call Stack 回答“谁触发”，UI Test 验证关键用户流程可以重复。</p></div>
       </aside>
 
-      <ul class="jx-proof-rail jx-container" aria-label="已验证的项目规模">
-        <li><span class="jx-proof-rail__label">Guided learning</span><strong class="jx-proof-rail__value">9</strong><span class="jx-proof-rail__detail">个引导步骤</span><span class="jx-source-tag" data-source="build">source count</span></li>
-        <li><span class="jx-proof-rail__label">Observability</span><strong class="jx-proof-rail__value">14</strong><span class="jx-proof-rail__detail">类结构化日志</span><span class="jx-source-tag" data-source="build">source count</span></li>
-        <li><span class="jx-proof-rail__label">UI test</span><strong class="jx-proof-rail__value">2 / 2</strong><span class="jx-proof-rail__detail">核心用户流程</span><span class="jx-source-tag" data-source="measured">simulator</span></li>
-        <li><span class="jx-proof-rail__label">Mechanisms</span><strong class="jx-proof-rail__value">4</strong><span class="jx-proof-rail__detail">种调用机制</span><span class="jx-source-tag" data-source="measured">trace</span></li>
-      </ul>
+      <div class="jx-container">
+        <ul class="jx-proof-rail" aria-label="已验证的项目规模">
+          <li><span class="jx-proof-rail__label">Guided learning</span><strong class="jx-proof-rail__value">9</strong><span class="jx-proof-rail__detail">个引导步骤</span><span class="jx-source-tag" data-source="build">source count</span></li>
+          <li><span class="jx-proof-rail__label">Observability</span><strong class="jx-proof-rail__value">14</strong><span class="jx-proof-rail__detail">类结构化日志</span><span class="jx-source-tag" data-source="build">source count</span></li>
+          <li><span class="jx-proof-rail__label">UI test</span><strong class="jx-proof-rail__value">2 / 2</strong><span class="jx-proof-rail__detail">核心用户流程</span><span class="jx-source-tag" data-source="measured">simulator</span></li>
+          <li><span class="jx-proof-rail__label">Mechanisms</span><strong class="jx-proof-rail__value">4</strong><span class="jx-proof-rail__detail">种调用机制</span><span class="jx-source-tag" data-source="measured">trace</span></li>
+        </ul>
+      </div>
 
       <section class="lab-section jx-container" id="system">
         <div class="lab-section__heading"><div><p class="jx-eyebrow"><span class="jx-eyebrow__rule"></span>System</p><h2>从可见操作，还原 UIKit 调用链。</h2></div><p>Guide 负责建立预测，运行时日志保存证据；两者共同服务于理解，不替学习者自动宣称掌握。</p></div>

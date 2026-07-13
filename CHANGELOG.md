@@ -21,6 +21,10 @@
 - Pages 工作流同时验证 generic iOS Simulator 构建、公开边界与完整 SHA Action 固定。
 - GitHub Pages 接入与个人主站一致的 Jason DS 2.2.0 vendor copy、证据标签、返回主站入口与编辑式社交预览。
 
+### Fixed
+
+- 修复 GitHub Pages 指标栏绕过共享容器、在桌面视口向左错位的问题，并增加结构审计防止同类回归。
+
 ## 1.1.0 - 2026-07-09
 
 扩展可观测实验版。
