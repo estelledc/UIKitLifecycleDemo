@@ -4,7 +4,7 @@
 
 > **English summary:** A code-first UIKit learning lab that makes framework-driven behavior observable through guided experiments, structured logs, call stacks, and UI tests.
 
-[公开案例页](https://estelledc.github.io/UIKitLifecycleDemo/) · [Jason Hub](https://estelledc.github.io/) · [About](https://estelledc.github.io/about/) · [Resume](https://estelledc.github.io/resume/)
+[公开案例页](https://estelledc.github.io/UIKitLifecycleDemo/) · [Guided Learning](docs/guided-learning.md) · [Call Stack 教学](docs/call-stack-teaching.md)
 
 案例页使用 List、Logs、Guide 三张真实 iPhone Simulator 截图；网页只解释系统，运行证据仍来自 UIKit App、Call Stack 与 XCTest。
 
@@ -151,11 +151,11 @@ git diff --check
 
 其中 `make verify-showcase` 会检查：
 
-- Problem / Role / System / Evidence / Limitations 与 Jason / AI 边界。
+- 学习系统、真实界面、调用链、验证证据与公开边界。
 - canonical、Open Graph、Twitter Card、JSON-LD 和分享图片尺寸。
 - 站内链接、锚点、图片 alt 与尺寸属性。
 - 9 / 14 / 2 三项展示数字是否仍与 Swift 源码一致。
-- Jason DS v2、reduced-motion、焦点样式与隐私标记。
+- 与 SwiftMessengerLab 一致的深蓝、青色、珊瑚色设计令牌、响应式布局与焦点样式。
 - 所有第三方 GitHub Actions 是否固定到完整 40 位 commit SHA。
 - List、Logs、Guide 三张 Simulator 截图及其尺寸。
 - PR 与 `main` 均执行 generic iOS Simulator 构建和网页审计；只有 `main` 两类检查通过后才部署 Pages。
@@ -182,7 +182,7 @@ UIKitLifecycleDemo/
 UIKitLifecycleDemoUITests/
 docs/
   index.html                 # 公开案例页
-  assets/                    # 页面样式、真实模拟器截图、Jason DS、分享图
+  assets/                    # 统一页面样式、项目图标、真实模拟器截图与分享图
 scripts/
   audit-showcase.py
   public-scan.sh
