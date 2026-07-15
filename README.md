@@ -96,7 +96,7 @@ Simulator: iPhone 17 Pro
 如果没有这个模拟器：
 
 ```bash
-make build SIMULATOR_NAME="iPhone 16 Pro"
+make run SIMULATOR_NAME="iPhone 16 Pro"
 ```
 
 环境准备见 [docs/setup.md](docs/setup.md)。
