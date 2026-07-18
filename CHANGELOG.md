@@ -16,10 +16,16 @@
 ### Changed
 
 - 导航栏实验入口改为 `Learn` 菜单，集中放置 Guide、Logs 和 Experiments。
+- Guide 从同时渲染九张长教材卡片改为一次一个实验；App 只显示动作、观察点、
+  真实源码锚点和一个 Xcode 操作，完整讲义迁入 `docs/guided-learning.md`。
+- Guided Learning 扩展为九张可独立完成的实验卡；每张都有真实源码锚点、App 与
+  Xcode / LLDB 操作、预期证据、Reset、边界和思考题，并由项目审计保持同步。
 - README 改成课程入口，优先引导 App 内 Logs 和 Guided Tour。
 - 日志重新保持 `🧭 [Owner] method - message` 前缀，方便 Console 过滤。
 - Pages 工作流同时验证 generic iOS Simulator 构建、公开边界与完整 SHA Action 固定。
 - GitHub Pages 接入与个人主站一致的 Jason DS 2.2.0 vendor copy、证据标签、返回主站入口与编辑式社交预览。
+- Simulator 默认匹配当前 Xcode SDK，并按 runtime 精确解析设备；迁移目录后会清理旧 DerivedData。
+- 共享 Scheme 在保留 Malloc Stack Logging 的同时开启 Main Thread Checker、Queue Debugging 与 View Debugging。
 
 ### Fixed
 

@@ -72,9 +72,12 @@ final class DemoLogPanelViewController: UITableViewController {
         })
         copyButton.accessibilityIdentifier = "copyVisibleLogsButton"
 
-        let pauseButton = UIBarButtonItem(title: "Pause Scroll", primaryAction: UIAction { [weak self] action in
-            self?.toggleAutoScroll(action)
-        })
+        let pauseButton = UIBarButtonItem(
+            title: "Pause Scroll",
+            style: .plain,
+            target: self,
+            action: #selector(toggleAutoScroll)
+        )
         pauseButton.accessibilityIdentifier = "pauseLogsButton"
         pauseScrollButton = pauseButton
 
@@ -163,7 +166,7 @@ final class DemoLogPanelViewController: UITableViewController {
         reloadEvents(scrollToBottom: !isAutoScrollPaused)
     }
 
-    private func toggleAutoScroll(_ action: UIAction) {
+    @objc private func toggleAutoScroll() {
         isAutoScrollPaused.toggle()
         pauseScrollButton?.title = isAutoScrollPaused ? "Resume Scroll" : "Pause Scroll"
         if !isAutoScrollPaused {
