@@ -202,7 +202,8 @@ final class ReminderListViewController: UICollectionViewController {
     private func configureDataSource() {
         DemoLog.print("ReminderListViewController", "configureDataSource", "configure ReminderCell, CellRegistration, and DiffableDataSource")
 
-        let cellRegistration = UICollectionView.CellRegistration<ReminderCell, Reminder> { [weak self] cell, indexPath, reminder in
+        let cellRegistration = UICollectionView.CellRegistration<ReminderCell, Reminder> { [weak self] cell, indexPath, snapshotReminder in
+            let reminder = self?.reminders.first(where: { $0.id == snapshotReminder.id }) ?? snapshotReminder
             self?.cellConfigurationCount += 1
             let count = self?.cellConfigurationCount ?? 0
             DemoLog.print("ReminderListViewController", "CellRegistration", "count: \(count), indexPath: \(indexPath), reminder: \(formatReminder(reminder))")
@@ -348,10 +349,11 @@ final class ReminderListViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
 
-        guard let selectedReminder = dataSource.itemIdentifier(for: indexPath) else {
+        guard let snapshotReminder = dataSource.itemIdentifier(for: indexPath) else {
             DemoLog.print("ReminderListViewController", "collectionView(_:didSelectItemAt:)", "no item at indexPath: \(indexPath)")
             return
         }
+        let selectedReminder = reminders.first(where: { $0.id == snapshotReminder.id }) ?? snapshotReminder
 
         DemoLog.print("ReminderListViewController", "collectionView(_:didSelectItemAt:)", "indexPath: \(indexPath), selectedReminder: \(formatReminder(selectedReminder))")
         openDetail(for: selectedReminder, using: .show)
